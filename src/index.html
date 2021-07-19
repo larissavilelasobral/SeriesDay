@@ -1,24 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Rede Social</title>
   </head>
   <body>
     <div id="root"></div>
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
+    <div id="firebaseui-auth-container">
+      <form class="login">
+        <label class="flex-itens" for="email">E-mail:</label>
+        <input class="flex-itens" id="email" type="email" autocomplete="on" placeholder="E-mail" required>
+
+        <label class="flex-itens" for="password">Password:</label>
+        <input class="flex-itens" id="password" type="password"  autocomplete="on" placeholder="Password" required>
+        <p class= "flex-itens" id= "nonUser"></p>
+        <label class="flex-itens" for="confirmPassword">Confirmation Password:</label>
+        <input class="flex-itens" autocomplete="on" id="confirmPassword" type="password" placeholder="Confirmation Password" required >
+
+        <div class="signin-buttons">
+          <a href="/about"><button id="signin-button" class="flex-itens">Sign in</button></a>
+          
+          <br>
+          <br>
+          <hr>
+          <button id="signingoogle-button" class="flex-itens">Sign in with Google</button>
+        </div>
+      </form>
+      <hr>
+      <p class="flex-itens signup">Don't have an account yet?</p>
+      <button id="signup-button" class="flex-itens">Sign up</button>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="/__/firebase/8.7.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
     https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="/__/firebase/8.7.1/firebase-auth.js"></script>
 
-<!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
+    <!-- Initialize Firebase -->
+    <!-- <script src="/__/firebase/init.js"></script> -->
+    <script src="/__/firebase/init.js?useEmulator=true"></script>
 
-    <script type="module" src="main.js"></script>
+    <script type="module" src="login.js"></script>
   </body>
 </html>
