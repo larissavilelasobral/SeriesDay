@@ -11,32 +11,37 @@
   </head>
   <body>
     <div id="root"></div>
-    <div id="signup">
-      <form id="formulario">
-        <h3>Login</h3>
-        <input class="flex-itens" id="email" type="email" autocomplete="on" placeholder="E-mail" required>
-
-        <input class="flex-itens" id="password" type="password"  autocomplete="on" placeholder="Password" required>
-
+    <div id="conteiner-login">
+      <form id="form-login">
+        <div class="wrapper">
+          <div class="input-data">
+            <input class="flex-itens input-login" id="email" type="email" autocomplete="on" required>
+            <div class="underline"></div>
+            <label>E-mail</label>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div class="input-data">
+            <input class="flex-itens input-login" id="password" type="password"  autocomplete="on" required>
+            <div class="underline"></div>
+            <label>Password</label>
+          <div>
+        <div>
         <!-- <input class="flex-itens" id="Confpassword" type="Confpassword"  autocomplete="on" placeholder="ConfPassword" required> -->
-
-        <p class= "flex-itens" id= "nonUser"></p>
-
-        <button id="signin-button" class="flex-itens">Sign In</button>
+        <p class= "flex-itens error" id= "nonUser"></p>
+        <div class="button-form">
+          <button id="signin-button" class="flex-itens button">Sign In</button>
+        </div>
       </form>
-    </div>
-    <div id="btn">
-    <button id="signup-button" class="flex-itens">Sign up</button>
-    <button id="signout-button" class="flex-itens">Sign Out</button>
+      <div id="button-aut">
+      <button id="signup-button" class="flex-itens button">Sign up</button>
+      <button id="signout-button" class="flex-itens button">Sign Out</button>
+      </div>
     </div>
     <!-- configuração do firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
-
     <script type="module" src="main.js"></script>
-    <script type="module" src="config.js"></script>
   </body>
 </html>

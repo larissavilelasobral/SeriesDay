@@ -1,11 +1,31 @@
 // Este é o ponto de entrada da sua aplicação
-
-// const { markAsUntransferable } = require("node:worker_threads");
-
 // import { myFunction } from './lib/index.js';
-
 // myFunction();
 
+// configuração da pagina firebase
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBMOPx6jE3wXjEBNo9LvUGpmbS4rtexDHY',
+  authDomain: 'socialnetworklab-48687.firebaseapp.com',
+  projectId: 'socialnetworklab-48687',
+  storageBucket: 'socialnetworklab-48687.appspot.com',
+  messagingSenderId: '566417511888',
+  appId: '1:566417511888:web:3b978aa839a1b85d7615d5',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+function singUp() {
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+
+  const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+  promise.catch((e) => alert(e.message));
+
+  alert('logado');
+}
 
 const email = document.getElementById('email');
 const password = document.getElementById('password');
@@ -20,18 +40,18 @@ const signOutButton = document.getElementById('signout-button');
 signInButton.addEventListener('click', (e) => {
   e.preventDefault();
   // eslint-disable-next-line max-len
-firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-  .then((userCredential) => {
+  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+    .then((userCredential) => {
     // Signed in
-    var user = userCredential.user;
-    alert(`Login feito pelo Email: ${email.value}`)
+      const user = userCredential.user;
+      alert(`Login feito pelo Email: ${email.value}. Info: ${user}`);
     // ...
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    alert(`Não há registro de usuário correspondente a este Email`)
-  });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(`Não há registro de usuário correspondente a este Email. info: ${errorCode} || ${errorMessage}`);
+    });
 });
 // criar novo Login de usuários
 signUpButton.addEventListener('click', (e) => {
@@ -51,8 +71,8 @@ signUpButton.addEventListener('click', (e) => {
 // sair da conta do usuario
 signOutButton.addEventListener('click', (e) => {
   e.preventDefault();
-  firebase.auth().signOut();
-  location.reload();
+  auth.signOut();
+  alert('sair da conta');
 });
 
 // firebase.auth().onAuthStateChanged((user) => {
