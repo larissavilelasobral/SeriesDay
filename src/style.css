@@ -1,5 +1,4 @@
 /* GERAL  */
-
 * {
     padding: 0;
     margin: 0;
@@ -7,71 +6,62 @@
     box-sizing: border-box;
     vertical-align: baseline;
     list-style: none;
-  }
-  
-body {
-    background-color: #333333;
-    width: 100%;
-    height: 180vw;
 }
-
 @font-face {
   font-family: "Aquatico";
   src: local(Aquatico), url(./assets/aquatico.otf);
 }
-
-
 /* LOGIN */
-
+body{
+    background: linear-gradient(-135deg, #78D6FE, #FFCA19);
+}
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 75%;
+    position: absolute;
+}
 #container-login {
     display: inline-block;
     align-items: center;
     width: 100%;
     max-width: 700px;
-    height: 30vw;
+    height: 40vw;
     padding: 10px;
 }
-
-.box {
-    background: linear-gradient(-135deg, #78D6FE, #FFCA19);
-    width: 90%;
-    border: 1px solid linear-gradient(-135deg, #78D6FE, #FFCA19);
-    box-shadow: inset 0 0 1em #F15E75, 0 0 1em black;
-    border-radius: 15px;
-    position: absolute;
-    top: 13%;
-    left: 5%;
-    padding: 5%;
-}
-
 .banner  {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     justify-content:space-between;
-    margin-bottom: 10%;
-  }
-  
-.banner img {
-    width: 30%;
+    /* margin-bottom: 64px; */
 }
-
+.banner img {
+    width: 102px;
+}
 .title-container {
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 .title {
     font-family: "Aquatico";
-    font-size: 25pt;
+    font-size: 20pt;
 }
-
 .subtitle {
     font-family: 'Averia Sans Libre', cursive;
     font-size: 15pt;
 }
-
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-top: -52px; */
+}
 .input {
     width: 250px;
     height: 40px;
@@ -85,14 +75,69 @@ body {
     margin:2% 0;
     cursor: pointer;
 }
-
-.form {
-    text-align: center;
-    margin-top: 5%;
+.signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
+.signin p {
+    font-family: 'Averia Sans Libre', cursive;
+    font-size: 15pt;
+    font-weight: bolder;
+    margin-top: 9px;
+}
 .login-buttons {
-    width: 30%;
+    width: 80px;
+    height: 40px;
+    /* margin-top: 3%; */
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Averia Sans Libre', cursive;
+    font-size: 12pt;
+}
+#signin-button:hover{
+    background-color: #FFCA19;
+}
+#signup-button {
+  background-color: rgba(0, 0, 255, 0);
+  border: none;
+  cursor: pointer;
+  font-size: larger;
+  /* margin-top: 0; */
+  color: #f3f3f3;
+  width: 100%;
+  font-size: 15pt;
+}
+span{
+  color: rgb(54, 54, 54);
+}
+span:hover {
+    color: #f3f3f3;
+}
+#firebaseui-auth-container{
+    display: block;
+}
+/* PAGINA CADASTRO */
+.banner-register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content:space-between;
+    margin-bottom: 30px;
+}
+.banner-register img{
+    width: 102px;
+}
+.formRegister{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -8%;
+}
+.login-buttons-register {
+    width: 113px;
     height: 40px;
     margin-top: 3%;
     cursor: pointer;
@@ -101,47 +146,11 @@ body {
     font-family: 'Averia Sans Libre', cursive;
     font-size: 12pt;
 }
-
-.signin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.signin p {
-    font-family: 'Averia Sans Libre', cursive;
-    font-size: 15pt;
-    font-weight: bolder;
-    margin-top: 8%;
-}
-
-#signin-button:hover{
+.login-buttons-register:hover{
     background-color: #FFCA19;
 }
-
-#signup-button {
-  background-color: rgba(0, 0, 255, 0);
-  border: none;
-  cursor: pointer;
-  font-size: larger;
-  margin-top: -1%;
-  color: #f3f3f3;
-  width: 100%;
-  font-size: 15pt;
+.seta{
+    width: 55px;
 }
-
-span{
-  color: rgb(54, 54, 54);
-}
-
-span:hover {
-    color: #f3f3f3;
-}
-
-#firebaseui-auth-container {
-    margin-top: 25%;
-}
-
-
 
 /* TIMELINE */
