@@ -7,7 +7,8 @@
 
     <link rel="sortcut icon" href="assets/logo.png" type="image/x-icon" />
 
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="style2.css" />
 
     <link href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300&display=swap" rel="stylesheet">
 
@@ -17,52 +18,16 @@
     <title>SeriesDay</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div> <!-- trocar por main? -->
 
-      <div class="box">
-
-        <main id="container-login">
-
-          <div class="banner">
-            <img src="assets/logo.png" alt="Logo">
-            <div class="title-container">
-              <h1 class="title">SeriesDay</h1>
-              <h3 class="subtitle">review de séries</h3>
-            </div>
-          </div>
-
-          <section>
-            <form class="form">
-              <input class="input" id="email" type="email" autocomplete="on" placeholder="E-mail" required>
-              <input class="input" id="password" type="password" autocomplete="on" placeholder="Senha" required>
-              <p id= "nonUser"></p>
-            </form>
-
-            <div class="signin">
-              <button id="signin-button" class="login-buttons">Entrar</button>
-              <p> OU </p>
-            </div>
-
-          </section>
-
-        </main>
-      
-        <div id="firebaseui-auth-container"></div>
-
-        <button id="signup-button" class="login-buttons"> Não possui cadastro? <span>Clique aqui</span> </button>
-
-      </div>
-
-<!-- Configuração do Firebsase -->
+    <!-- Configuração do Firebsase -->
     <script src="/__/firebase/8.7.1/firebase-app.js"></script>
-
     <script src="/__/firebase/8.7.1/firebase-auth.js"></script>
     <script src="/__/firebase/8.7.0/firebase-firestore.js"></script>
 
-<!-- Inicializando Firebase -->
+    <!-- Inicializando Firebase -->
     <script src="/__/firebase/init.js?useEmulator=true"></script>
 
     <script type="module" src="main.js"></script>
-    <script type="module" src="timeline.js"></script>
   </body>
 </html>
