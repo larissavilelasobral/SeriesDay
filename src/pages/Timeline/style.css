@@ -67,9 +67,41 @@ body {
     display: none;
 }
 
+#nope {
+    display: none;
+}
+.nomeDoDiv{
+    display: none;
+}
+#nope:checked ~ .nomeDoDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flex-li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .input:checked ~ label .menu {
     box-shadow: 0 0 0 130vw #FFF, 0 0 0 130vh #FFF;
 }
+.boxnope{
+    font-size: 0.3em;
+    text-align: center;
+    line-height: 13px;
+    color: rgb(255, 255, 255);
+    width: 122px;
+    height: 35px;
+    background: rgb(235,133,105);
+    background: linear-gradient(61deg, rgba(235,133,105,1) 27%, rgba(235,108,105,1) 67%);
+    font-family: "Work Sans", sans-serif;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 8px 0px 10px 0px;
+}
+
 
 .input:checked ~ label .hamburger {
     transform: rotate(45deg);
@@ -92,7 +124,7 @@ body {
 
 .inside-menu {
     position: absolute;
-    top: 50%;
+    top: 43%;
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%);
@@ -107,7 +139,38 @@ body {
     justify-content: space-around;
     align-items: center;
 }
-
+.button-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputImg{
+    margin: 5px;
+    padding: 17px;
+}
+.escondeesconde > p{
+    display: none;
+}
+div:hover > p {
+    display: block;
+}
+.buttonImg{
+    color: #009688;
+    background: #fff;
+    border: 1px solid #009688;
+    font-size: 15px;
+    padding: 7px 12px;
+    font-weight: normal;
+    margin-right: 12px;
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 120px;
+}
+.buttonImg:hover{
+    color:#fff;
+    background:#009688;
+}
 .username-menu {
     font-family: 'Averia Sans Libre', cursive;
     font-size: 20pt;

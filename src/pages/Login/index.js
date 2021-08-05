@@ -1,4 +1,4 @@
-import { googleLogin } from '../../services/index.js';
+import { googleLogin, signInWithEmailPassword } from '../../services/index.js';
 
 export default () => {
     document.querySelector('#root').innerHTML = ' ';
@@ -7,10 +7,10 @@ export default () => {
     <link rel="stylesheet" href="./pages/Login/style.css" />
 
     <main class="box">
-
         <div id="container" class="container">
 
             <div class="banner">
+            
                 <img src="assets/logo.png" alt="Logo">
                 <div class="title-container">
                     <h1 class="title">SeriesDay</h1>
@@ -44,13 +44,23 @@ export default () => {
     </main>
     
     `;
-
     container.innerHTML = template;
-
-    //  AUTENTICAÇÃO COM CONTA GOOGLE
+console.log('bbb')
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const signInButton = document.getElementById('signin-button');
+    const signUpButton = document.getElementById('signup-button');
+    const newUser = document.getElementById('nonUser');
+  // signInWithEmailPassword
+  signInButton.addEventListener('click', () => {
+      console.log('aa')
+    signInWithEmailPassword(email, password, newUser);
+  });
+    
+    // AUTENTICAÇÃO COM CONTA GOOGLE
     const googleButton = container.querySelector('#google-button');
 
-    googleButton.addEventListener("click", (e) => {
+    googleButton.addEventListener('click', (e) => {
         e.preventDefault();
         console.log("pegou")
         const provider = new firebase.auth.GoogleAuthProvider();

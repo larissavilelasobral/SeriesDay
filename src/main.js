@@ -24,41 +24,36 @@ const init = () => {
 };
 
 // FUNÇÃO PARA ABRIR O SITE SEMPRE NO CADASTRO E VERIFICAR SE TEVE MUDANÇA NA #
-window.addEventListener('load', () => {
-  container.appendChild(login());
-  init();
+// window.addEventListener('load', () => {
+//   container.appendChild(login());
+//   init();
 
-  // VARIAVEIS
-  const email = document.getElementById('email');
-  const password = document.getElementById('password');
-  const newUser = document.getElementById('nonUser');
-  const signInButton = document.getElementById('signin-button');
-  const signUpButton = document.getElementById('signup-button');
+//   // VARIAVEIS
 
-  // LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
-  signInButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(`descobrir oq é ${user}`);
-        window.location.hash = 'timeline'; // ir para o feed
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        newUser.innerHTML = ('Não há registro de usuário correspondente a este Email');
-        console.log(`descobrir oq é ${errorCode} e ${errorMessage}`);
-      });
-  });
+//   // // LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
+//   // signInButton.addEventListener('click', (e) => {
+//   //   e.preventDefault();
+//   //   firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+//   //     .then((userCredential) => {
+//   //       const user = userCredential.user;
+//   //       console.log(`descobrir oq é ${user}`);
+//   //       window.location.hash = 'timeline'; // ir para o feed
+//   //     })
+//   //     .catch((error) => {
+//   //       const errorCode = error.code;
+//   //       const errorMessage = error.message;
+//   //       newUser.innerHTML = ('Não há registro de usuário correspondente a este Email');
+//   //       console.log(`descobrir oq é ${errorCode} e ${errorMessage}`);
+//   //     });
+//   // });
 
-  // BOTÃO PARA MUDAR PARA A PAGINA DE CADASTRO APÓS O CARREGAMENTO DA PAGINA
-  signUpButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.hash = 'register'; // ir para pagina cadastro
-  });
+//   // BOTÃO PARA MUDAR PARA A PAGINA DE CADASTRO APÓS O CARREGAMENTO DA PAGINA
+//   signUpButton.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     window.location.hash = 'register'; // ir para pagina cadastro
+//   });
 
-});
+// });
 
 // Iniciando o firebase
 document.addEventListener('DOMContentLoaded', function() {

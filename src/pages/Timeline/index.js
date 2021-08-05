@@ -2,7 +2,8 @@ import { signOut } from '../../services/index.js';
 
 export default () => {
   const user = firebase.auth().currentUser;
-  const timeline = (document.getElementById("container").innerHTML = `
+  // eslint-disable-next-line no-multi-assign
+  const timeline = (document.getElementById('container').innerHTML = `
   <link rel="stylesheet" href="./pages/Timeline/style.css" />
 
     <div class="banner">
@@ -21,16 +22,23 @@ export default () => {
     </label>
 
     <ul class="inside-menu">
-      <li>
+      <li class="flex-li">
+
         <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu">
-        <input type="file" id="photo" class="inputImg">
-        <button id="uploadImage" class="buttonImg">Alterar Foto Perfil</button>
+
+        <input type="checkbox" id="nope" />
+        <div class="nomeDoDiv">
+          <input type="file" id="photo" class="inputImg" accept=".jpg, .jpeg, .png">
+          <button id="uploadImage" class="buttonImg">Enviar Imagem</button>
+          <label for="nope"></label>
+        </div>
+        <label class="boxnope" for="nope">Alterar Imagem</label>
       </li>
       <li>
-        <p class="username-menu"> <b>${user.displayName || "Usuário"} </b> </p>
+        <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
       </li>
       <li>
-        <p class="email-menu"> ${user.email || "Usuário"} </p>
+        <p class="email-menu"> ${user.email || 'Usuário'} </p>
       </li>
 
       <button id="signout-button" class="signout-button buttons">
@@ -47,30 +55,45 @@ export default () => {
 
   `);
 
-  //Sair da conta do usuário
-  document.getElementById("signout-button").addEventListener("click", (e) => {
+  // const show = true;
+
+  // const menuSection = document.querySelector('#container');
+  // const menuToggle = menuSection.querySelector('.inside-menu');
+
+  // menuToggle.addEventListener('click', () => {
+  //   document.body.style.overflow = show ? 'hidden' : 'initial';
+
+  //   menuSection.classList.toggle('on', show);
+  //   show = !show;
+  // });
+  // const menuHambutg = document.querySelector('#navbar');
+  // menuHambutg.addEventListener('click', () => {
+
+  // });
+  // Sair da conta do usuário
+  document.getElementById('signout-button').addEventListener('click', (e) => {
     e.preventDefault();
     signOut();
   });
 
   // Criando coleção no firebase chamada 'posts'
-  const postsCollection = firebase.firestore().collection("posts");
+  const postsCollection = firebase.firestore().collection('posts');
 
   // Enviando posts para o firestore
-  document.getElementById("postForm").addEventListener("submit", (event) => {
+  document.getElementById('postForm').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const text = document.getElementById("postText").value;
+    const text = document.getElementById('postText').value;
 
     const post = {
-      text: text,
-      userId: "Patrícia",
+      text,
+      userId: user.displayName,
       likes: 0,
       comments: [],
     };
 
     postsCollection.add(post).then(() => {
-      document.getElementById("postText").value = "";
+      document.getElementById('postText').value = '';
       loadPosts();
     });
   });
@@ -78,14 +101,14 @@ export default () => {
   // Adicionando posts
   function createTemplatePost(post) {
     const date = new Date();
-    
+
     const postTemplate = `
       <li class="posts-box">
         <div id="${post.id}"class="post-container">
           <div class="user-container">
             <img src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo">
             <div class="username-date-container">
-              <p class="username"> ${user.displayName || "Usuário"} </p>
+              <p class="username"> ${user.displayName || 'Usuário'} </p>
               <time class="date">${date.toLocaleString('pt-BR')}</time>
             </div>
           </div>
@@ -104,14 +127,18 @@ export default () => {
           <button class="commentPost-btn timeline-buttons">💬</button>
           <div></div>
         </div>
+        <form action="" class="postForm1">
+          <textarea type="textarea" class="postText1" class="post-textarea" rows="5" cols="50">${post.data().text}</textarea>
+          <button type="submit" class="post-button1"> Send </button>
+        </form>
       </li>
     `;
-    document.getElementById("posts").innerHTML += postTemplate;
+    document.getElementById('posts').innerHTML += postTemplate;
 
     // Deletando posts
-    const deleteButtons = document.querySelectorAll(".deletePost-btn");
+    const deleteButtons = document.querySelectorAll('.deletePost-btn');
     for (const button of deleteButtons) {
-      button.addEventListener("click", function (event) {
+      button.addEventListener('click', (event) => {
         console.log(event.target.parentNode.id);
         deletePost(event.target.parentNode.id);
       });
@@ -127,10 +154,10 @@ export default () => {
     }
 
     // Curtindo posts
-    const likeButtons = document.querySelectorAll(".likePost-btn");
+    const likeButtons = document.querySelectorAll('.likePost-btn');
 
     for (const button of likeButtons) {
-      button.addEventListener("click", function (event) {
+      button.addEventListener('click', (event) => {
         console.log(event.target.parentNode.id);
         addLikes(event.target.parentNode.id);
       });
@@ -154,14 +181,14 @@ export default () => {
     console.log('botão de upa img');
     const ref = firebase.storage().ref();
     const file = document.querySelector('#photo').files[0];
-    const name = new Date() + '-' + file.name
+    const name = `${new Date()}-${file.name}`;
     const metadata = {
       contentType: file.type,
     };
     const task = ref.child(name).put(file, metadata);
     task
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
+      .then((snapshot) => snapshot.ref.getDownloadURL())
+      .then((url) => {
         console.log(url);
         console.log('imagem upada');
         const image = document.querySelector('#preview');
@@ -176,15 +203,35 @@ export default () => {
 
   // Mostrando os posts na tela
   function loadPosts() {
-    document.getElementById("posts").innerHTML = "Carregando posts...";
+    document.getElementById('posts').innerHTML = 'Carregando posts...';
 
     postsCollection.get().then((snap) => {
-      document.getElementById("posts").innerHTML = "";
+      document.getElementById('posts').innerHTML = '';
       snap.forEach((post) => {
         createTemplatePost(post);
       });
     });
   }
+
+  const botaoEdit = document.querySelectorAll('.post-button1');
+  for (const botao of botaoEdit) {
+    console.log('buscando')
+    botao.addEventListener('click', (event) => {
+      console.log(event.target.parentNode.id); // id do post em que o botão foi clicado
+      editarPost(event.target.parentNode.id); // função de enviar edição
+    });
+  }
+
+  function editarPost(id) {
+    console.log('função edit chamada');
+    postsCollection.doc(id).update({
+      text: 'novo post',
+    })
+      .then(() => {
+        loadPosts();
+      });
+  }
+
 
   loadPosts();
 

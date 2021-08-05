@@ -37,8 +37,25 @@ export const loginWithEmail = (email, password, profileName) => {
         .set({
           name: profileName,
           id: user.uid,
-          photo: 'botão add url photo',
+          photo: user.photoURL,
         });
       console.log(user);
+    });
+};
+
+// LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
+export const signInWithEmailPassword = (email, password, newUser) => {
+  console.log('dddsds')
+  firebase.auth().signInWithEmailAndPassword(email.value, password.value, newUser)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(`descobrir oq é ${user}`);
+      window.location.hash = 'timeline'; // ir para o feed
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      newUser.innerHTML = ('Não há registro de usuário correspondente a este Email');
+      console.log(`descobrir oq é ${errorCode} e ${errorMessage}`);
     });
 };
