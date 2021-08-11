@@ -1,4 +1,4 @@
-import { signOut } from "../../services/index.js";
+import { signOut, deletePost, editPost } from '../../services/index.js';
 
 export default () => {
   const user = firebase.auth().currentUser;
@@ -6,7 +6,7 @@ export default () => {
   if (!user) {
     signOut();
   }
-  const timeline = document.createElement("div");
+  const timeline = document.createElement('div');
   timeline.innerHTML = `
   <link rel="stylesheet" href="./pages/Timeline/style.css" />
 
@@ -29,7 +29,7 @@ export default () => {
     <ul class="inside-menu">
       <div class="profile-container">
         <li class="upload-photo">
-          <img id="preview" src="${user.photoURL || "../../assets/default-user-img.png"}" class="user-photo-menu">
+          <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
           <input type="checkbox" id="nope" />
           <div class="photo-buttons">
             <label class="labelfile"for="photo">Selecionar Imagem</label>
@@ -40,10 +40,10 @@ export default () => {
           <label class="arrow" for="nope"></label>
         </li>
         <li>
-          <p class="username-menu"> <b>${user.displayName || "Usuário"} </b> </p>
+          <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
         </li>
         <li>
-          <p class="email-menu"> ${user.email || "usuario@email.com"} </p>
+          <p class="email-menu"> ${user.email || 'usuario@email.com'} </p>
         </li>
       </div>
 
@@ -62,7 +62,7 @@ export default () => {
     
   <div class="desktop-profile-container">
     <li class="upload-photo">
-      <img id="preview" src="${user.photoURL || "../../assets/default-user-img.png"}" class="user-photo-menu desktop-preview">
+      <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu desktop-preview">
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
         <label class="labelfile"for="photo">Selecionar Imagem</label>
@@ -73,10 +73,10 @@ export default () => {
       <label class="arrow" for="desktop-nope"></label>
     </li>
     <li>
-      <p class="username-menu"> <b>${user.displayName || "Usuário"} </b> </p>
+      <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
     </li>
     <li>
-      <p class="email-menu"> ${user.email || "usuario@email.com"} </p>
+      <p class="email-menu"> ${user.email || 'usuario@email.com'} </p>
     </li>
   </div>
 
@@ -87,43 +87,42 @@ export default () => {
   `;
 
   // Sair da conta do usuário (MOBILE)
-  timeline.querySelector("#signout-button").addEventListener("click", (e) => {
+  timeline.querySelector('#signout-button').addEventListener('click', (e) => {
     e.preventDefault();
     signOut();
   });
 
   // Sair da conta do usuário (DESKTOP)
-  timeline.querySelector(".desktop-signout-button").addEventListener("click", (e) => {
-      e.preventDefault();
-      signOut();
-    });
+  timeline.querySelector('.desktop-signout-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    signOut();
+  });
 
   // Criando coleção no firebase chamada 'posts'
-  const postsCollection = firebase.firestore().collection("posts");
+  const postsCollection = firebase.firestore().collection('posts');
 
   // Enviando posts para o firestore
-  timeline.querySelector("#postForm").addEventListener("submit", (event) => {
+  timeline.querySelector('#postForm').addEventListener('submit', (event) => {
     event.preventDefault();
-    const text = timeline.querySelector("#postText").value;
+    const text = timeline.querySelector('#postText').value;
 
-    if(text) {
+    if (text) {
       const getDate = () => {
         const date = new Date();
-        return date.toLocaleString("pt-BR");
+        return date.toLocaleString('pt-BR');
       };
       const post = {
-        text: text,
+        text,
         likes: 0,
         date: getDate(),
         id: user.uid,
         email: user.email,
       };
       postsCollection.add(post).then(() => {
-        timeline.querySelector("#postText").value = "";
+        timeline.querySelector('#postText').value = '';
         loadPosts();
       });
-    }
-    else {
+    } else {
       alert('Por favor, digite uma review antes de publicar.');
     }
   });
@@ -134,9 +133,9 @@ export default () => {
       <li data-templatepost class="posts-box">
         <div id="${post.id}"class="post-container">
           <div class="user-container">
-            <img src="${postUser.data().photo || "../../assets/default-user-img.png"}" class="user-photo">
+            <img src="${postUser.data().photo || '../../assets/default-user-img.png'}" class="user-photo">
             <div class="username-date-container">
-              <p class="username"> ${postUser.data().name || "Usuário"} </p>
+              <p class="username"> ${postUser.data().name || 'Usuário'} </p>
               <time class="date">${post.data().date}</time>
             </div>
           </div>
@@ -174,40 +173,24 @@ export default () => {
       </li>
     `;
 
-    const postBox = timeline.querySelector("#posts");
+    const postBox = timeline.querySelector('#posts');
     postBox.innerHTML += postTemplate;
 
     // Deletar posts
-    const deleteButtons = postBox.querySelectorAll(".deletePost-btn");
+    const deleteButtons = postBox.querySelectorAll('.deletePost-btn');
     for (const button of deleteButtons) {
-      button.addEventListener("click", (event) => {
-        const deleteConfirmation = confirm("Tem certeza quer deseja deletar esse post?");
+      button.addEventListener('click', (event) => {
+        const deleteConfirmation = confirm('Tem certeza quer deseja deletar esse post?');
         if (deleteConfirmation) {
           deletePost(event.currentTarget.parentNode.id);
+          loadPosts();
         } else {
           return false;
         }
       });
     }
 
-    function deletePost(id) {
-      postsCollection
-        .doc(id)
-        .delete()
-        .then(() => {
-          loadPosts();
-        });
-    }
-
     // Curtir e descurtir posts
-    const likeButtons = postBox.querySelectorAll(".likePost-btn");
-
-    for (const button of likeButtons) {
-      button.addEventListener("click", (event) => {
-        likePost(event.currentTarget.parentNode.id);
-      });
-    }
-
     function likePost(id) {
       const promiseLikes = postsCollection
         .doc(id)
@@ -237,15 +220,24 @@ export default () => {
       return promiseLikes.then();
     }
 
-    const postLi = timeline.querySelectorAll('[data-templatePost]');
-    // Abrir área de editar post
-    function openEditPost(element) {
-      element.querySelector(".edited-post").classList.remove("display-none");
-      element.querySelector(".save-edit-button").classList.remove("display-none");
-      element.querySelector(".close-edit-button").classList.remove("display-none");
-      element.querySelector(".edit-container").classList.remove("display-none");
+    const likeButtons = postBox.querySelectorAll('.likePost-btn');
+
+    for (const button of likeButtons) {
+      button.addEventListener('click', (event) => {
+        likePost(event.currentTarget.parentNode.id);
+      });
     }
-    
+
+    // Abrir área de editar post
+    const postLi = timeline.querySelectorAll('[data-templatePost]');
+
+    function openEditPost(element) {
+      element.querySelector('.edited-post').classList.remove('display-none');
+      element.querySelector('.save-edit-button').classList.remove('display-none');
+      element.querySelector('.close-edit-button').classList.remove('display-none');
+      element.querySelector('.edit-container').classList.remove('display-none');
+    }
+
     for (const openEdit of postLi) {
       openEdit.addEventListener('click', (e) => {
         const target = e.target;
@@ -257,11 +249,11 @@ export default () => {
 
     // Fechar área de editar post
     function closeEditPost(element) {
-      element.querySelector(".edited-post").classList.add("display-none");
-      element.querySelector(".save-edit-button").classList.add("display-none");
-      element.querySelector(".close-edit-button").classList.add("display-none");
-      element.querySelector(".edit-container").classList.add("display-none");
-      element.querySelector(".empty-text").innerHTML = "";
+      element.querySelector('.edited-post').classList.add('display-none');
+      element.querySelector('.save-edit-button').classList.add('display-none');
+      element.querySelector('.close-edit-button').classList.add('display-none');
+      element.querySelector('.edit-container').classList.add('display-none');
+      element.querySelector('.empty-text').innerHTML = '';
     }
 
     for (const closeEdit of postLi) {
@@ -273,18 +265,6 @@ export default () => {
       });
     }
 
-    // Editar post
-    function editPost(newPost, id) {
-      postsCollection
-        .doc(id)
-        .update({
-          text: newPost,
-        })
-        .then(() => {
-          loadPosts();
-        });
-    }
-
     for (const buttonSave of postLi) {
       buttonSave.addEventListener('click', (e) => {
         const editedPost = buttonSave.querySelector('.edited-post').value;
@@ -293,8 +273,9 @@ export default () => {
           e.preventDefault();
           if (editedPost) {
             editPost(editedPost, e.target.parentNode.id);
+            loadPosts();
           } else {
-            const emptyText = buttonSave.querySelector(".empty-text");
+            const emptyText = buttonSave.querySelector('.empty-text');
             emptyText.style.color = 'red';
             emptyText.innerHTML = 'Edite sua review antes de salvar.';
           }
@@ -303,22 +284,22 @@ export default () => {
     }
 
     // Visibilidade dos botões de editar e deletar
-    // const visibilityOfButtons = (timeline, user) => {
-    //   if (user !== firebase.auth().currentUser.email) {
-    //     timeline.querySelector('.deletePost-btn').classList.add('visibility-hidden');
-    //     timeline.querySelector('.editPost-btn').classList.add('visibility-hidden');
-    //   }
-    // };
+    function visibilityOfButtons(timeline, user) {
+      const usersCollection = firebase.firestore().collection('users').doc(post.data().id);
+      if (user !== usersCollection) {
+        timeline.querySelector('.deletePost-btn').classList.add('visibility-hidden');
+        timeline.querySelector('.editPost-btn').classList.add('visibility-hidden');
+      }
+    }
 
-    // visibilityOfButtons(timeline, user);
+    visibilityOfButtons(timeline, user);
   }
 
   // Adicionando foto do perfil (MOBILE)
-  const uploadImage = timeline.querySelector("#uploadImage");
-  uploadImage.addEventListener("click", () => {
-    console.log("botão de upa img");
+  const uploadImage = timeline.querySelector('#uploadImage');
+  uploadImage.addEventListener('click', () => {
     const ref = firebase.storage().ref();
-    const file = timeline.querySelector("#photo").files[0];
+    const file = timeline.querySelector('#photo').files[0];
     const name = `${new Date()}-${file.name}`;
     const metadata = {
       contentType: file.type,
@@ -328,8 +309,8 @@ export default () => {
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => {
         console.log(url);
-        console.log("imagem upada");
-        const image = timeline.querySelector("#preview");
+        console.log('imagem upada');
+        const image = timeline.querySelector('#preview');
         image.src = url;
         const userUp = firebase.auth().currentUser;
         userUp.updateProfile({
@@ -340,11 +321,10 @@ export default () => {
   });
 
   // Adicionando foto do perfil (DESKTOP)
-  const uploadImageDestkop = timeline.querySelector(".desktop-upload-image");
-  uploadImageDestkop.addEventListener("click", () => {
-    console.log("botão de upa img");
+  const uploadImageDestkop = timeline.querySelector('.desktop-upload-image');
+  uploadImageDestkop.addEventListener('click', () => {
     const ref = firebase.storage().ref();
-    const file = timeline.querySelector(".desktop-photo").files[0];
+    const file = timeline.querySelector('.desktop-photo').files[0];
     const name = `${new Date()}-${file.name}`;
     const metadata = {
       contentType: file.type,
@@ -353,9 +333,7 @@ export default () => {
     task
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => {
-        console.log(url);
-        console.log("imagem upada");
-        const image = timeline.querySelector(".desktop-preview");
+        const image = timeline.querySelector('.desktop-preview');
         image.src = url;
         const userUp = firebase.auth().currentUser;
         userUp.updateProfile({
@@ -372,8 +350,8 @@ export default () => {
     postsCollection.orderBy('date', 'desc').get().then((snap) => {
       timeline.querySelector('#posts').innerHTML = '';
       snap.forEach((post) => {
-        const users = firebase.firestore().collection('users').doc(post.data().email);
-        users.get().then((postUser) => {
+        const usersCollection = firebase.firestore().collection('users').doc(post.data().email);
+        usersCollection.get().then((postUser) => {
           createTemplatePost(post, postUser);
         });
       });

@@ -14,7 +14,7 @@ export const googleLogin = (provider) => {
       const errorCode = error.code;
       if (errorCode === 'auth/account-exists-with-different-credential') {
         alert('Essa conta já existe com uma credencial diferente');
-      } 
+      }
     });
 };
 
@@ -22,6 +22,22 @@ export const signOut = () => {
   firebase.auth().signOut();
   window.location.hash = '';
   location.reload();
+};
+
+const postsCollection = firebase.firestore().collection('posts');
+
+export const deletePost = (id) => {
+  postsCollection
+    .doc(id)
+    .delete();
+};
+
+export const editPost = (newPost, id) => {
+  postsCollection
+    .doc(id)
+    .update({
+      text: newPost,
+    });
 };
 
 export const loginWithEmail = (email, password, profileName) => {
@@ -40,5 +56,5 @@ export const loginWithEmail = (email, password, profileName) => {
           photo: 'botão add url photo',
         });
       location.reload();
-    })
+    });
 };
