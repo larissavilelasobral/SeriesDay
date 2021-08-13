@@ -40,21 +40,23 @@ export const editPost = (newPost, id) => {
     });
 };
 
-export const loginWithEmail = (email, password, profileName) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      const user = result.user;
-      const userUp = firebase.auth().currentUser;
-      userUp.updateProfile({
-        displayName: profileName,
-        photoURL: 'urlImg',
-      });
-      firebase.firestore().collection('users').doc(user.email)
-        .set({
-          name: profileName,
-          id: user.uid,
-          photo: 'botão add url photo',
-        });
-      location.reload();
-    });
+export const saveUserUpdate = (name) => {
+  firebase.auth().currentUser.updateProfile({
+    displayName: name,
+  })
+    .then(() => true)
+    .catch((error) => error);
 };
+
+export const saveUser = (user, userEmail, userName) => {
+  firebase.firestore().collection('users').doc(userEmail).set({
+    userId: user.uid,
+    name: userName,
+    email: userEmail
+  })
+    .then(() => true)
+    .catch((error) => error);
+};
+
+export const registerUser = (email, password) => firebase.auth()
+  .createUserWithEmailAndPassword(email, password);

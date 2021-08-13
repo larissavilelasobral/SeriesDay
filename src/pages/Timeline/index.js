@@ -133,7 +133,7 @@ export default () => {
       <li data-templatepost class="posts-box">
         <div id="${post.id}"class="post-container">
           <div class="user-container">
-            <img src="${postUser.data().photo || '../../assets/default-user-img.png'}" class="user-photo">
+            <img id="photo-profile" src="${postUser.data().photo || '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
             <div class="username-date-container">
               <p class="username"> ${postUser.data().name || 'Usuário'} </p>
               <time class="date">${post.data().date}</time>
@@ -352,6 +352,15 @@ export default () => {
       snap.forEach((post) => {
         const usersCollection = firebase.firestore().collection('users').doc(post.data().email);
         usersCollection.get().then((postUser) => {
+          // const nomeTal = timeline.querySelector('#photo-profile');
+          // const nomeOutro = timeline.querySelector('.user-container');
+          // if (user.photoURL === null) {
+          //   nomeTal.setAttribute('src', '../../assets/default-user-img.png')
+          //   nomeOutro.appendChild(nomeTal)
+          // } else {
+          //   nomeTal.setAttribute('src', 'user.photoURL')
+          //   nomeOutro.appendChild(nomeTal)
+          // }
           createTemplatePost(post, postUser);
         });
       });
