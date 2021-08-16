@@ -1,4 +1,4 @@
-import { loginWithEmail } from '../../services/index.js';
+import { saveUserUpdate, saveUser, registerUser } from '../../services/index.js';
 
 export default () => {
   const register = document.createElement('div');
@@ -54,7 +54,11 @@ export default () => {
   // INPUTS PARA CADASTRO
   signUpButtonRegister.addEventListener('click', (e) => {
     e.preventDefault();
-    loginWithEmail(email.value, password.value, profileName.value)
+    registerUser(email.value, password.value)
+      .then((userUpdate) => {
+        saveUserUpdate(profileName.value);
+        saveUser(userUpdate.user, email.value, profileName.value);
+      })
   });
 
   // VERFIFICAÇÃO DE SENHA (TAMANHO E CONFIRMAÇÃO)
