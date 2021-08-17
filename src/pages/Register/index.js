@@ -26,8 +26,6 @@ export default () => {
                     <input class="input" id="password-confirm" type="password" autocomplete="on" placeholder="⚙  Confirmar Senha" required>
 
                     <p class="password-rules" id="password-error"></p>
-
-                    <p id="nonUser"></p>
                 </form>
                 <button id="signup-button-register" class="buttons register-button">Cadastrar-se</button>
                 <button id="gobackButton" class="goback-button">
@@ -43,7 +41,6 @@ export default () => {
   const email = register.querySelector('#email');
   const password = register.querySelector('#password');
 
-  const newUser = register.querySelector('#nonUser');
   const signUpButtonRegister = register.querySelector('#signup-button-register');
   const gobackButton = register.querySelector('#gobackButton');
 

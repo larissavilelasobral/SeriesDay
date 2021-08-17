@@ -42,7 +42,7 @@ export const editPost = (newPost, id) => {
 
 export const saveUserUpdate = (name) => {
   firebase.auth().currentUser.updateProfile({
-    displayName: name,
+    displayName: name
   })
     .then(() => true)
     .catch((error) => error);
@@ -52,7 +52,8 @@ export const saveUser = (user, userEmail, userName) => {
   firebase.firestore().collection('users').doc(userEmail).set({
     userId: user.uid,
     name: userName,
-    email: userEmail
+    email: userEmail,
+    photo: ''
   })
     .then(() => true)
     .catch((error) => error);

@@ -133,7 +133,7 @@ export default () => {
       <li data-templatepost class="posts-box">
         <div id="${post.id}"class="post-container">
           <div class="user-container">
-            <img id="photo-profile" src="${postUser.data().photo || '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
+            <img id="photo-profile" src="${(postUser.data().photo) !== '' ? postUser.data().photo : '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
             <div class="username-date-container">
               <p class="username"> ${postUser.data().name || 'Usuário'} </p>
               <time class="date">${post.data().date}</time>
@@ -161,10 +161,10 @@ export default () => {
             </button>  
 
             <div id=${post.id}>
-              <button class="editPost-btn timeline-buttons">
+              <button class="editPost-btn timeline-buttons visibility-hidden">
                 <img data-edit src="./assets/pencil.png" alt="Ícone de Lápis">
               </button>
-              <button class="deletePost-btn timeline-buttons">
+              <button class="deletePost-btn timeline-buttons visibility-hidden">
                 <img src="./assets/trash.png" alt="Ícone de Lixeira">
               </button>
             </div>
@@ -283,16 +283,26 @@ export default () => {
       });
     }
 
-    // Visibilidade dos botões de editar e deletar
-    function visibilityOfButtons(timeline, user) {
-      const usersCollection = firebase.firestore().collection('users').doc(post.data().id);
-      if (user !== usersCollection) {
-        timeline.querySelector('.deletePost-btn').classList.add('visibility-hidden');
-        timeline.querySelector('.editPost-btn').classList.add('visibility-hidden');
+    // Visibilidade dos botões de editar, deletar e curtir
+    for (const deleteVisilibity of deleteButtons) {
+      if (firebase.auth().currentUser.email === postUser.data().email) {
+        deleteVisilibity.classList.remove('visibility-hidden');
       }
     }
 
-    visibilityOfButtons(timeline, user);
+    const editPencil = timeline.querySelectorAll('.editPost-btn')
+
+    for (const editVisilibity of editPencil) {
+      if (firebase.auth().currentUser.email === postUser.data().email) {
+        editVisilibity.classList.remove('visibility-hidden');
+      }
+    }
+
+    for (const likeVisilibity of likeButtons) {
+      if (firebase.auth().currentUser.email === postUser.data().email) {
+        likeVisilibity.classList.add('visibility-hidden'); 
+      }
+    } 
   }
 
   // Adicionando foto do perfil (MOBILE)
@@ -335,9 +345,14 @@ export default () => {
       .then((url) => {
         const image = timeline.querySelector('.desktop-preview');
         image.src = url;
-        const userUp = firebase.auth().currentUser;
-        userUp.updateProfile({
+        const currentUserUp = firebase.auth().currentUser;
+        currentUserUp.updateProfile({
           photoURL: url,
+        });
+
+        const userUp = firebase.firestore().collection('users').doc(user.email);
+        userUp.updateProfile({
+          photo: url,
         });
         location.reload();
       });
@@ -352,16 +367,9 @@ export default () => {
       snap.forEach((post) => {
         const usersCollection = firebase.firestore().collection('users').doc(post.data().email);
         usersCollection.get().then((postUser) => {
-          // const nomeTal = timeline.querySelector('#photo-profile');
-          // const nomeOutro = timeline.querySelector('.user-container');
-          // if (user.photoURL === null) {
-          //   nomeTal.setAttribute('src', '../../assets/default-user-img.png')
-          //   nomeOutro.appendChild(nomeTal)
-          // } else {
-          //   nomeTal.setAttribute('src', 'user.photoURL')
-          //   nomeOutro.appendChild(nomeTal)
-          // }
           createTemplatePost(post, postUser);
+          // console.log(postUser.data())
+          // console.log(postUser.data().photo);
         });
       });
     });
