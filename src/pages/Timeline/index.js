@@ -301,8 +301,6 @@ export default () => {
     for (const likeVisilibity of likeButtons) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
         likeVisilibity.classList.add('visibility-hidden'); 
-        console.log(postUser.data().email)
-        console.log(firebase.auth().currentUser.email)
       }
     } 
   }
@@ -352,7 +350,7 @@ export default () => {
           photoURL: url,
         });
 
-        const userUp = firebase.firestore().collection('users').doc();
+        const userUp = firebase.firestore().collection('users').doc(user.email);
         userUp.updateProfile({
           photo: url,
         });
