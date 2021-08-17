@@ -408,6 +408,13 @@ input[type='file'] {
     font-family: "Work Sans", sans-serif;
 }
 
+.photo-message {
+    font-family: "Work Sans", sans-serif;
+    color:#747272;
+    margin-top: 5px;
+    font-size: 0.25em;
+}
+
 
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
@@ -535,5 +542,10 @@ input[type='file'] {
         border-radius: 5px;
         margin-left: 50%; 
     }
+
+    .photo-message {
+        font-size: 0.9em;
+    }
+
 }
 
