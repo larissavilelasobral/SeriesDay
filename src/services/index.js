@@ -53,7 +53,7 @@ export const saveUser = (user, userEmail, userName) => {
     userId: user.uid,
     name: userName,
     email: userEmail,
-    photo: 'https://avatars.githubusercontent.com/patbarnabe'
+    photo: ''
   })
     .then(() => true)
     .catch((error) => error);

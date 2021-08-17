@@ -133,7 +133,7 @@ export default () => {
       <li data-templatepost class="posts-box">
         <div id="${post.id}"class="post-container">
           <div class="user-container">
-            <img id="photo-profile" src="${postUser.data().photo}" class="user-photo" accept=".jpg, .jpeg, .png">
+            <img id="photo-profile" src="${(postUser.data().photo) !== '' ? postUser.data().photo : '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
             <div class="username-date-container">
               <p class="username"> ${postUser.data().name || 'Usuário'} </p>
               <time class="date">${post.data().date}</time>
