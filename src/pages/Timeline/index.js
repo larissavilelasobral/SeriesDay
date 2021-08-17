@@ -337,6 +337,11 @@ export default () => {
           photoURL: url
         });
 
+        // const userUp = firebase.firestore().collection('users').doc();
+        // userUp.updateProfile({
+        //   photo: url
+        // });
+
       });
   });
 
@@ -350,7 +355,6 @@ export default () => {
     setTimeout(function(){ 
       photoMsg.parentNode.removeChild(photoMsg);   
     }, 6000);
-
 
     const ref = firebase.storage().ref();
     const file = timeline.querySelector('#photo').files[0];
@@ -368,6 +372,11 @@ export default () => {
         currentUserUp.updateProfile({
           photoURL: url
         });
+
+        // const userUp = firebase.firestore().collection('users').doc();
+        // userUp.updateProfile({
+        //   photo: url
+        // });
       });
   });
 
