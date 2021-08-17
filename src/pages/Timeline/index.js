@@ -30,6 +30,7 @@ export default () => {
       <div class="profile-container">
         <li class="upload-photo">
           <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
+          <p class="photo-message" id="photo-message"></p>
           <input type="checkbox" id="nope" />
           <div class="photo-buttons">
             <label class="labelfile"for="photo">Selecionar Imagem</label>
@@ -63,10 +64,13 @@ export default () => {
   <div class="desktop-profile-container">
     <li class="upload-photo">
       <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu desktop-preview">
+
+      <p class="photo-message" id="photo-message"></p>
+
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
         <label class="labelfile"for="photo">Selecionar Imagem</label>
-        <input type="file" id="photo" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
+        <input type="file" id="photo-desktop" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
         <button id="uploadImage" class="enviar-button desktop-upload-image">Enviar</button>
         <label for="desktop-nope"></label>
       </div>
@@ -308,6 +312,14 @@ export default () => {
   // Adicionando foto do perfil (MOBILE)
   const uploadImage = timeline.querySelector('#uploadImage');
   uploadImage.addEventListener('click', () => {
+
+    const photoMsg = timeline.querySelector('#photo-message');
+    photoMsg.innerHTML = 'Carregando imagem...';
+
+    setTimeout(function(){ 
+      photoMsg.parentNode.removeChild(photoMsg);   
+    }, 6000);
+
     const ref = firebase.storage().ref();
     const file = timeline.querySelector('#photo').files[0];
     const name = `${new Date()}-${file.name}`;
@@ -318,23 +330,30 @@ export default () => {
     task
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => {
-        console.log(url);
-        console.log('imagem upada');
         const image = timeline.querySelector('#preview');
         image.src = url;
-        const userUp = firebase.auth().currentUser;
-        userUp.updateProfile({
-          photoURL: url,
+        const currentUserUp = firebase.auth().currentUser;
+        currentUserUp.updateProfile({
+          photoURL: url
         });
-        location.reload();
+
       });
   });
 
   // Adicionando foto do perfil (DESKTOP)
   const uploadImageDestkop = timeline.querySelector('.desktop-upload-image');
   uploadImageDestkop.addEventListener('click', () => {
+
+    const photoMsg = timeline.querySelector('#photo-message');
+    photoMsg.innerHTML = 'Carregando imagem...';
+
+    setTimeout(function(){ 
+      photoMsg.parentNode.removeChild(photoMsg);   
+    }, 6000);
+
+
     const ref = firebase.storage().ref();
-    const file = timeline.querySelector('.desktop-photo').files[0];
+    const file = timeline.querySelector('#photo').files[0];
     const name = `${new Date()}-${file.name}`;
     const metadata = {
       contentType: file.type,
@@ -347,14 +366,8 @@ export default () => {
         image.src = url;
         const currentUserUp = firebase.auth().currentUser;
         currentUserUp.updateProfile({
-          photoURL: url,
+          photoURL: url
         });
-
-        const userUp = firebase.firestore().collection('users').doc(user.email);
-        userUp.updateProfile({
-          photo: url,
-        });
-        location.reload();
       });
   });
 
