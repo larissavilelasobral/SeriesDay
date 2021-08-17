@@ -155,7 +155,7 @@ export default () => {
           </div>
 
           <div id=${post.id} class="buttons-container">
-            <button class="likePost-btn timeline-buttons visibility-hidden"> 
+            <button class="likePost-btn timeline-buttons"> 
               <img src="./assets/heart.png" alt="Ícone de Coração">
               ${post.data().likes}
             </button>  
@@ -287,7 +287,6 @@ export default () => {
     for (const deleteVisilibity of deleteButtons) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
         deleteVisilibity.classList.remove('visibility-hidden');
-        
       }
     }
 
@@ -300,8 +299,10 @@ export default () => {
     }
 
     for (const likeVisilibity of likeButtons) {
-      if (firebase.auth().currentUser.email !== postUser.data().email) {
-        likeVisilibity.classList.remove('visibility-hidden'); 
+      if (firebase.auth().currentUser.email === postUser.data().email) {
+        likeVisilibity.classList.add('visibility-hidden'); 
+        console.log(postUser.data().email)
+        console.log(firebase.auth().currentUser.email)
       }
     } 
   }
@@ -370,7 +371,7 @@ export default () => {
         usersCollection.get().then((postUser) => {
           createTemplatePost(post, postUser);
           // console.log(postUser.data())
-          console.log(postUser.data().photo);
+          // console.log(postUser.data().photo);
         });
       });
     });
