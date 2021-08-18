@@ -70,7 +70,7 @@ export default () => {
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
         <label class="labelfile"for="photo">Selecionar Imagem</label>
-        <input type="file" id="photo-desktop" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
+        <input type="file" id="photo" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
         <button id="uploadImage" class="enviar-button desktop-upload-image">Enviar</button>
         <label for="desktop-nope"></label>
       </div>
@@ -104,7 +104,7 @@ export default () => {
 
   // Criando coleção no firebase chamada 'posts'
   const postsCollection = firebase.firestore().collection('posts');
-
+console.log(postsCollection)
   // Enviando posts para o firestore
   timeline.querySelector('#postForm').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -372,12 +372,28 @@ export default () => {
         currentUserUp.updateProfile({
           photoURL: url
         });
-
-        // const userUp = firebase.firestore().collection('users').doc();
-        // userUp.updateProfile({
-        //   photo: url
-        // });
-      });
+        postsCollection.get().then((snap) => {
+          snap.forEach((post) => {
+            console.log(post.data().email)
+            console.log(url)
+            const current = firebase.auth().currentUser;
+            console.log(current.email)
+            if (post.data().email === current.email) {
+              const userUp = firebase.firestore().collection('users').doc(post.data().email)
+              return userUp.update({
+                photo: url
+              })
+              .then(()=> {
+                console.log("Document successfully updated!");
+              })
+              .catch((error) => {
+                console.error("Error updating document: ", error);
+              })
+            }
+          })
+        })
+    })
+    
   });
 
   // Mostrando os posts na tela
