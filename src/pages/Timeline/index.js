@@ -30,7 +30,9 @@ export default () => {
       <div class="profile-container">
         <li class="upload-photo">
           <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
-          <p class="photo-message" id="photo-message"></p>
+
+          <p class="photo-message" id="photo-message-mobile"></p>
+
           <input type="checkbox" id="nope" />
           <div class="photo-buttons">
             <label class="labelfile"for="photo">Selecionar Imagem</label>
@@ -65,7 +67,7 @@ export default () => {
     <li class="upload-photo">
       <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu desktop-preview">
 
-      <p class="photo-message" id="photo-message"></p>
+      <p class="photo-message" id="photo-message-desktop"></p>
 
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
@@ -104,7 +106,7 @@ export default () => {
 
   // Criando coleção no firebase chamada 'posts'
   const postsCollection = firebase.firestore().collection('posts');
-console.log(postsCollection)
+
   // Enviando posts para o firestore
   timeline.querySelector('#postForm').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -310,15 +312,12 @@ console.log(postsCollection)
   }
 
   // Adicionando foto do perfil (MOBILE)
+  const photoMsgMobile = timeline.querySelector('#photo-message-mobile');
   const uploadImage = timeline.querySelector('#uploadImage');
+
   uploadImage.addEventListener('click', () => {
-
-    const photoMsg = timeline.querySelector('#photo-message');
-    photoMsg.innerHTML = 'Carregando imagem...';
-
-    setTimeout(function(){ 
-      photoMsg.parentNode.removeChild(photoMsg);   
-    }, 6000);
+   
+    photoMsgMobile.innerHTML = 'Carregando imagem...';
 
     const ref = firebase.storage().ref();
     const file = timeline.querySelector('#photo').files[0];
@@ -337,24 +336,36 @@ console.log(postsCollection)
           photoURL: url
         });
 
-        // const userUp = firebase.firestore().collection('users').doc();
-        // userUp.updateProfile({
-        //   photo: url
-        // });
-
+        postsCollection.get().then((snap) => {
+          snap.forEach((post) => {
+            const currentUser = firebase.auth().currentUser;
+            
+            if (post.data().email === currentUser.email) {
+              const userUp = firebase.firestore().collection('users').doc(post.data().email)
+              return userUp.update({
+                photo: url
+              })
+              .then(()=> {
+                photoMsgMobile.innerHTML = '';
+                window.location.reload();
+              })
+              .catch((error) => {
+                console.error("Error updating document: ", error);
+              })
+            }
+          })
+        })
+ 
       });
   });
 
   // Adicionando foto do perfil (DESKTOP)
+  const photoMsgDesktop = timeline.querySelector('#photo-message-desktop');
   const uploadImageDestkop = timeline.querySelector('.desktop-upload-image');
+
   uploadImageDestkop.addEventListener('click', () => {
 
-    const photoMsg = timeline.querySelector('#photo-message');
-    photoMsg.innerHTML = 'Carregando imagem...';
-
-    setTimeout(function(){ 
-      photoMsg.parentNode.removeChild(photoMsg);   
-    }, 6000);
+    photoMsgDesktop.innerHTML = 'Carregando imagem...';
 
     const ref = firebase.storage().ref();
     const file = timeline.querySelector('#photo').files[0];
@@ -366,6 +377,7 @@ console.log(postsCollection)
     task
       .then((snapshot) => snapshot.ref.getDownloadURL())
       .then((url) => {
+        photoMsgDesktop.innerHTML = 'Carregando imagem...';
         const image = timeline.querySelector('.desktop-preview');
         image.src = url;
         const currentUserUp = firebase.auth().currentUser;
@@ -374,17 +386,16 @@ console.log(postsCollection)
         });
         postsCollection.get().then((snap) => {
           snap.forEach((post) => {
-            console.log(post.data().email)
-            console.log(url)
-            const current = firebase.auth().currentUser;
-            console.log(current.email)
-            if (post.data().email === current.email) {
+            const currentUser = firebase.auth().currentUser;
+
+            if (post.data().email === currentUser.email) {
               const userUp = firebase.firestore().collection('users').doc(post.data().email)
               return userUp.update({
                 photo: url
               })
               .then(()=> {
-                console.log("Document successfully updated!");
+                photoMsgDesktop.innerHTML = '';
+                window.location.reload();
               })
               .catch((error) => {
                 console.error("Error updating document: ", error);
@@ -406,8 +417,6 @@ console.log(postsCollection)
         const usersCollection = firebase.firestore().collection('users').doc(post.data().email);
         usersCollection.get().then((postUser) => {
           createTemplatePost(post, postUser);
-          // console.log(postUser.data())
-          // console.log(postUser.data().photo);
         });
       });
     });
