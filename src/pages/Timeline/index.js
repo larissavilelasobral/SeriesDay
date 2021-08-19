@@ -31,13 +31,13 @@ export default () => {
         <li class="upload-photo">
           <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
 
-          <p class="photo-message" id="photo-message-mobile"></p>
+          <p class="photo-message font-work" id="photo-message-mobile"></p>
 
           <input type="checkbox" id="nope" />
           <div class="photo-buttons">
-            <label class="labelfile"for="photo">Selecionar Imagem</label>
+            <label class="labelfile font-work"for="photo">Selecionar Imagem</label>
             <input type="file" id="photo" class="input-img" accept=".jpg, .jpeg, .png">
-            <button id="uploadImage" class="enviar-button destkop-upload-image">Enviar</button>
+            <button id="uploadImage" class="enviar-button destkop-upload-image font-work">Enviar</button>
             <label for="nope"></label>
           </div>
           <label class="arrow" for="nope"></label>
@@ -57,7 +57,7 @@ export default () => {
   </div>
   
   <form action="" id="postForm" class="post-form">
-    <textarea type="textarea" id="postText" class="post-textarea" rows="5" cols="50" placeholder="Digite aqui sua review..."></textarea>
+    <textarea type="textarea" id="postText" class="post-textarea font-work" rows="5" cols="50" placeholder="Digite aqui sua review..."></textarea>
     <button type="submit" class="buttons post-button"> Publicar </button>
   </form>
 
@@ -67,13 +67,13 @@ export default () => {
     <li class="upload-photo">
       <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu desktop-preview">
 
-      <p class="photo-message" id="photo-message-desktop"></p>
+      <p class="photo-message font-work" id="photo-message-desktop"></p>
 
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
-        <label class="labelfile"for="photo">Selecionar Imagem</label>
+        <label class="labelfile font-work"for="photo">Selecionar Imagem</label>
         <input type="file" id="photo" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
-        <button id="uploadImage" class="enviar-button desktop-upload-image">Enviar</button>
+        <button id="uploadImage" class="enviar-button font-work desktop-upload-image">Enviar</button>
         <label for="desktop-nope"></label>
       </div>
       <label class="arrow" for="desktop-nope"></label>
@@ -90,6 +90,13 @@ export default () => {
     <img src="./assets/exit.png" alt="Ícone de Saída">
   </button>
 
+  <div id="modal-publish" class="modal-publish-container">
+    <div class="modal-publish">
+      <h3 class="font-work"> Por favor, digite uma review antes de publicar. </h3>
+
+      <button id="publish-confirmation" class="btn-modal btn-ok"> OK </button>
+    </div>
+  </div>
   `;
 
   // Sair da conta do usuário (MOBILE)
@@ -103,6 +110,44 @@ export default () => {
     e.preventDefault();
     signOut();
   });
+
+  // Manipulando os modais
+  function startModalDelete() {
+    const modalDelete = timeline.querySelector('#modal-delete')
+    const modalPublish = timeline.querySelector('#modal-publish')
+    if(modalDelete){
+      modalDelete.classList.add('show-modal')
+
+      modalDelete.addEventListener('click', (e) => {
+        if(e.target.id == 'modal-delete' || e.target.className == 'btn-modal btn-cancel') {
+          modalDelete.classList.remove('show-modal')
+        }
+      })
+    }
+    else if (modalPublish) {
+      modalPublish.classList.add('show-modal')
+
+      modalPublish.addEventListener('click', (e) => {
+        if(e.target.id == 'modal-publish' || e.target.className == 'btn-modal btn-ok') {
+          modalPublish.classList.remove('show-modal')
+        }
+      })
+    }
+  }
+
+  function startModalPublish() {
+    const modalPublish = timeline.querySelector('#modal-publish')
+    
+    if (modalPublish) {
+      modalPublish.classList.add('show-modal')
+
+      modalPublish.addEventListener('click', (e) => {
+        if(e.target.id == 'modal-publish' || e.target.className == 'btn-modal btn-ok') {
+          modalPublish.classList.remove('show-modal')
+        }
+      })
+    }
+  }
 
   // Criando coleção no firebase chamada 'posts'
   const postsCollection = firebase.firestore().collection('posts');
@@ -129,7 +174,7 @@ export default () => {
         loadPosts();
       });
     } else {
-      alert('Por favor, digite uma review antes de publicar.');
+      startModalPublish();
     }
   });
 
@@ -147,11 +192,11 @@ export default () => {
           </div>
         
           <div id=${post.id}>
-            <textarea disabled class="post" rows="4" cols="50">${post.data().text}</textarea>
+            <textarea disabled class="post font-work" rows="4" cols="50">${post.data().text}</textarea>
             <div id=${post.id} class="edit-container display-none">
-              <textarea class="post edited-post display-none" rows="4" cols="50">${post.data().text}</textarea>
+              <textarea class="post font-work edited-post display-none" rows="4" cols="50">${post.data().text}</textarea>
 
-              <p class="empty-text"></p>
+              <p class="empty-text font-work"></p>
             
               <div id=${post.id} class="edit-buttons-container">
                 <button data-close class='close-edit-button buttons display-none' type='button'> Cancelar </button>
@@ -161,22 +206,33 @@ export default () => {
           </div>
 
           <div id=${post.id} class="buttons-container">
-            <button class="likePost-btn timeline-buttons"> 
+            <button class="likePost-btn timeline-buttons font-work"> 
               <img src="./assets/heart.png" alt="Ícone de Coração">
               ${post.data().likes}
             </button>  
 
             <div id=${post.id}>
-              <button class="editPost-btn timeline-buttons visibility-hidden">
+              <button class="editPost-btn timeline-buttons font-work visibility-hidden">
                 <img data-edit src="./assets/pencil.png" alt="Ícone de Lápis">
               </button>
-              <button class="deletePost-btn timeline-buttons visibility-hidden">
+              <button class="deletePost-btn timeline-buttons font-work visibility-hidden">
                 <img src="./assets/trash.png" alt="Ícone de Lixeira">
               </button>
             </div>
           </div>
         </div> 
       </li>
+
+      <div id="modal-delete" class="modal-delete-container">
+        <div class="modal-delete">
+          <h3 class="font-work"> Tem certeza quer deseja deletar esse post? </h3>
+
+          <div id=${post.id}>
+            <button id="delete-confirmation" class="btn-modal btn-yes"> Sim </button>
+            <button class="btn-modal btn-cancel"> Cancelar </button>
+          </div>
+        </div>
+      </div>
     `;
 
     const postBox = timeline.querySelector('#posts');
@@ -186,15 +242,21 @@ export default () => {
     const deleteButtons = postBox.querySelectorAll('.deletePost-btn');
     for (const button of deleteButtons) {
       button.addEventListener('click', (event) => {
-        const deleteConfirmation = confirm('Tem certeza quer deseja deletar esse post?');
-        if (deleteConfirmation) {
-          deletePost(event.currentTarget.parentNode.id);
-          loadPosts();
-        } else {
-          return false;
-        }
+        event.preventDefault()
+        startModalDelete()
       });
     }
+
+    const deleteConfirmation = timeline.querySelectorAll('#delete-confirmation');
+
+    for (const button of deleteConfirmation) {
+      button.addEventListener('click', (event) => {
+        event.preventDefault()
+        deletePost(event.currentTarget.parentNode.id);
+        loadPosts();
+      })
+    }
+   
 
     // Curtir e descurtir posts
     function likePost(id) {
@@ -409,7 +471,7 @@ export default () => {
 
   // Mostrando os posts na tela
   function loadPosts() {
-    timeline.querySelector('#posts').innerHTML = '<span class="loading-post">Carregando posts...</span>';
+    timeline.querySelector('#posts').innerHTML = '<span class="font-work">Carregando posts...</span>';
 
     postsCollection.orderBy('date', 'desc').get().then((snap) => {
       timeline.querySelector('#posts').innerHTML = '';
