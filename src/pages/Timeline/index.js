@@ -57,7 +57,7 @@ export default () => {
   </div>
   
   <form action="" id="postForm" class="post-form">
-    <textarea type="textarea" id="postText" class="post-textarea font-work" rows="5" cols="50" placeholder="Digite aqui sua review..."></textarea>
+    <textarea type="textarea" id="postText" class="post-textarea font-work" rows="10" cols="100" placeholder="Digite aqui sua review..."></textarea>
     <button type="submit" class="buttons post-button"> Publicar </button>
   </form>
 
@@ -114,7 +114,6 @@ export default () => {
   // Manipulando os modais
   function startModalDelete() {
     const modalDelete = timeline.querySelector('#modal-delete')
-    const modalPublish = timeline.querySelector('#modal-publish')
     if(modalDelete){
       modalDelete.classList.add('show-modal')
 
@@ -124,20 +123,10 @@ export default () => {
         }
       })
     }
-    else if (modalPublish) {
-      modalPublish.classList.add('show-modal')
-
-      modalPublish.addEventListener('click', (e) => {
-        if(e.target.id == 'modal-publish' || e.target.className == 'btn-modal btn-ok') {
-          modalPublish.classList.remove('show-modal')
-        }
-      })
-    }
   }
 
   function startModalPublish() {
     const modalPublish = timeline.querySelector('#modal-publish')
-    
     if (modalPublish) {
       modalPublish.classList.add('show-modal')
 
@@ -192,7 +181,7 @@ export default () => {
           </div>
         
           <div id=${post.id}>
-            <textarea disabled class="post font-work" rows="4" cols="50">${post.data().text}</textarea>
+            <textarea disabled class="post font-work" rows="7" cols="100">${post.data().text}</textarea>
             <div id=${post.id} class="edit-container display-none">
               <textarea class="post font-work edited-post display-none" rows="4" cols="50">${post.data().text}</textarea>
 
