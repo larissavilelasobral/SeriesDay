@@ -64,12 +64,12 @@ export default () => {
         if (errorCode === 'auth/email-already-in-use') {
           console.log(errorCode)
           emailError.style.color = 'red';
-          emailError.innerHTML = 'E-mail já cadastrado.'
+          emailError.innerHTML = 'E-mail já cadastrado'
         }
         else if (errorCode === 'auth/invalid-email') {
           console.log(errorCode)
           emailError.style.color = 'red';
-          emailError.innerHTML = 'Insira um e-mail inválido.'
+          emailError.innerHTML = 'Insira um e-mail inválido'
         }
       })
   });
@@ -78,7 +78,7 @@ export default () => {
   const verifyPasswordLength = () => {
     if (password.value.length < 6) {
       passwordLength.style.color = 'red';
-      passwordLength.innerHTML = 'Senha com mínimo de 6 dígitos.';
+      passwordLength.innerHTML = 'Senha com mínimo de 6 dígitos';
     } else {
       passwordLength.style.color = 'darkgreen';
       passwordLength.innerHTML = 'Senha válida!';
@@ -88,7 +88,7 @@ export default () => {
   const verifyConfirmPassword = () => {
     if (password.value !== passwordConfirm.value) {
       passwordError.style.color = 'red';
-      passwordError.innerHTML = 'Senhas não correspondentes.';
+      passwordError.innerHTML = 'Senhas não correspondentes';
       return false;
     } else {
       passwordError.style.color = 'darkgreen';

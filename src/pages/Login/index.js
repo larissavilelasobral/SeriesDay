@@ -73,7 +73,7 @@ export default () => {
         }
         else if (errorCode === 'auth/wrong-password') {
           loginError.style.color = 'red';
-          loginError.innerHTML = ('Senha inválida.');
+          loginError.innerHTML = ('Senha inválida');
         }
       });
     } 
