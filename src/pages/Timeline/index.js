@@ -36,6 +36,8 @@ export default () => {
           <input type="checkbox" id="nope" />
           <div class="photo-buttons">
             <label class="labelfile font-work"for="photo">Selecionar Imagem</label>
+            <span class="photo-tooltiptext font-work"> Tamanho ideal da foto: 96x96 </span>
+
             <input type="file" id="photo" class="input-img" accept=".jpg, .jpeg, .png">
             <button id="uploadImage" class="enviar-button destkop-upload-image font-work">Enviar</button>
             <label for="nope"></label>
@@ -43,7 +45,7 @@ export default () => {
           <label class="arrow" for="nope"></label>
         </li>
         <li>
-          <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
+          <p class="username-menu"> <b>${user.displayName || 'Usuário Anônimo'} </b> </p>
         </li>
         <li>
           <p class="email-menu"> ${user.email || 'usuario@email.com'} </p>
@@ -71,7 +73,9 @@ export default () => {
 
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
-        <label class="labelfile font-work"for="photo">Selecionar Imagem</label>
+        <label class="labelfile font-work" for="photo">Selecionar Imagem</label>
+        <span class="photo-tooltiptext font-work"> Tamanho ideal da foto: 96x96 </span>
+
         <input type="file" id="photo" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
         <button id="uploadImage" class="enviar-button font-work desktop-upload-image">Enviar</button>
         <label for="desktop-nope"></label>
@@ -79,7 +83,7 @@ export default () => {
       <label class="arrow" for="desktop-nope"></label>
     </li>
     <li>
-      <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
+      <p class="username-menu"> <b>${user.displayName || 'Usuário Anônimo'} </b> </p>
     </li>
     <li>
       <p class="email-menu"> ${user.email || 'usuario@email.com'} </p>
@@ -175,7 +179,7 @@ export default () => {
           <div class="user-container">
             <img id="photo-profile" src="${(postUser.data().photo) !== '' ? postUser.data().photo : '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
             <div class="username-date-container">
-              <p class="username"> ${postUser.data().name || 'Usuário'} </p>
+              <p class="username"> ${postUser.data().name || 'Usuário Anônimo'} </p>
               <time class="date">${post.data().date}</time>
             </div>
           </div>

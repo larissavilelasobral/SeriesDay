@@ -20,7 +20,7 @@ export default () => {
                 <form class="form">
                 <input class="input" id="email" type="email" autocomplete="on" placeholder="E-mail" required>
                 <input class="input" id="password" type="password" autocomplete="on" placeholder="Senha" required>
-                <p id= "nonUser"></p>
+                <p id="nonUser" class="font-work"></p>
                 </form>
 
                 <div class="signin">
@@ -46,7 +46,7 @@ export default () => {
   // VARIAVEIS
   const email = login.querySelector('#email');
   const password = login.querySelector('#password');
-  const newUser = login.querySelector('#nonUser');
+  const nonUser = login.querySelector('#nonUser');
   const signInButton = login.querySelector('#signin-button');
   const signUpButton = login.querySelector('#signup-button');
 
@@ -56,14 +56,13 @@ export default () => {
     firebase.auth().signInWithEmailAndPassword(email.value, password.value)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(`descobrir oq é ${user}`);
         window.location.hash = 'timeline'; // ir para o feed
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        newUser.innerHTML = ('Não há registro de usuário correspondente a este Email');
-        console.log(`descobrir oq é ${errorCode} e ${errorMessage}`);
+        nonUser.style.color = 'red';
+        nonUser.innerHTML = ('Não há registro de usuário correspondente a este e-mail');
       });
   });
 

@@ -4,10 +4,6 @@ body {
     overflow: scroll;
 }
 
-.font-work {
-    font-family: "Work Sans", sans-serif;
-}
-
 .modal-delete-container, .modal-publish-container {
     width: 100vw;
     height: 100vh;
@@ -267,7 +263,7 @@ input[type='file'] {
     border-radius: 5px;
     color: rgb(148, 148, 148);
     cursor: pointer;
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
     padding: 6px 11px;
     border-style: dashed;
     font-size: 0.3em;
@@ -275,6 +271,17 @@ input[type='file'] {
 
 .labelfile:hover{
     color: #990707d8;
+}
+
+.photo-tooltiptext {
+    visibility: hidden;
+    margin-bottom: 10px;
+    font-size: 0.3em;
+}
+
+.labelfile:hover + .photo-tooltiptext {
+    visibility: visible;
+    cursor: default;
 }
 
 .username-menu {
@@ -448,6 +455,7 @@ input[type='file'] {
     border: none;
     background: none;
     cursor: pointer;
+    top: -33px;
 }
 
 .signout-button img {
@@ -479,7 +487,6 @@ input[type='file'] {
 }
 
 .photo-message {
-    color:#747272;
     margin-top: 5px;
     font-size: 0.25em;
 }
@@ -488,7 +495,7 @@ input[type='file'] {
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
     body {
-        background-image: url(../../assets/7.jpg);
+        background-image: url(../../assets/background-desktop.png);
         background-size: cover;
         background-attachment: fixed;
         background-color: #15141f;
@@ -520,7 +527,7 @@ input[type='file'] {
         justify-content: flex-start;
         margin: -10px 0 0 -9px;
         position: fixed;
-        background-color: #8A8A7F;
+        background-color: #7e7e7e;
         padding: 10px;
     }
 
@@ -571,7 +578,8 @@ input[type='file'] {
         border-radius: 5px;
         padding-top: 70px;
         padding-bottom: 70px;
-        background-image: linear-gradient(#990707, #F24E4B, rgb(250, 210, 157));
+        background-color: #7e7e7e8f;
+        border: 8px solid #15141f;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
     }
 
@@ -602,28 +610,34 @@ input[type='file'] {
     }
 
     .li-post-container {
-        background-image: linear-gradient(rgb(250, 210, 157), #F24E4B, #990707 );
+        /* background-image: linear-gradient(rgb(250, 210, 157), #F24E4B, #990707 ); */
         width:40%;
         border-radius: 5px;
         margin-left: 50%;
         padding: 2%;
         margin-top: 25px;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+        background-color: #7e7e7e8f;
     }
 
     .post-form {
         /* background-image: url(https://www.xmple.com/wallpaper/linear-yellow-gradient-blue-512x512-c2-ffdab9-afeeee-a-105-f-14.svg); */
-        background-image: linear-gradient(#990707, #F24E4B, rgb(250, 210, 157));
+        /* background-image: linear-gradient(#990707, #F24E4B, rgb(250, 210, 157)); */
         width:40%;
         border-radius: 5px;
         margin-left: 50%; 
         padding: 20px;
         margin-top: 80px;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+        background-color: #7e7e7e8f;
     }
 
     .photo-message {
         font-size: 0.9em;
+    }
+
+    .photo-tooltiptext {
+        font-size: 1em;
     }
 
 }

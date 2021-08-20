@@ -22,6 +22,10 @@ body {
   display: none;
 }
 
+.font-work {
+  font-family: "Work Sans", sans-serif;
+}
+
 @font-face {
   font-family: "Aquatico";
   src: local(Aquatico), url(./assets/aquatico.otf);
