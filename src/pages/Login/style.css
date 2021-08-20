@@ -154,6 +154,35 @@ span:hover {
     width: 10%;
 }
 
+.modal-email-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-email {
+    background-color: beige;
+    width: 60%;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 30px;
+    border: 8px solid #15141f;
+    border-radius: 5px;
+    box-shadow: 0 0 0 8px beige;
+    text-align: center;
+}
+
+.modal-email-container.show-modal {
+    display: flex;
+}
+
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
 

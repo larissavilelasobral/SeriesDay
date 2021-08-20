@@ -20,7 +20,7 @@ export default () => {
                 <form class="form">
                 <input class="input" id="email" type="email" autocomplete="on" placeholder="E-mail" required>
                 <input class="input" id="password" type="password" autocomplete="on" placeholder="Senha" required>
-                <p id="nonUser" class="font-work"></p>
+                <p id="loginError" class="error-message font-work"></p>
                 </form>
 
                 <div class="signin">
@@ -36,7 +36,13 @@ export default () => {
             </button>
 
             <button id="signup-button" class="signup-button buttons"> Não possui cadastro? <span>Clique aqui</span> </button>
+        </div>
 
+        <div id="modal-email" class="modal-email-container">
+          <div class="modal-email">
+            <h3 class="font-work"> Por favor, preencha os campos de login ou cadastre-se. </h3>
+            <button id="email-confirmation" class="btn-modal btn-ok"> OK </button>
+          </div>
         </div>
 
     </main>
@@ -46,25 +52,49 @@ export default () => {
   // VARIAVEIS
   const email = login.querySelector('#email');
   const password = login.querySelector('#password');
-  const nonUser = login.querySelector('#nonUser');
+  const loginError = login.querySelector('#loginError');
   const signInButton = login.querySelector('#signin-button');
   const signUpButton = login.querySelector('#signup-button');
 
   // LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
   signInButton.addEventListener('click', (e) => {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+    if (email.value) {
+      firebase.auth().signInWithEmailAndPassword(email.value, password.value)
       .then((userCredential) => {
         const user = userCredential.user;
         window.location.hash = 'timeline'; // ir para o feed
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        nonUser.style.color = 'red';
-        nonUser.innerHTML = ('Não há registro de usuário correspondente a este e-mail');
+        if (errorCode === 'auth/invalid-email') {
+          loginError.style.color = 'red';
+          loginError.innerHTML = ('Não há registro de usuário correspondente a este e-mail');
+        }
+        else if (errorCode === 'auth/wrong-password') {
+          loginError.style.color = 'red';
+          loginError.innerHTML = ('Senha inválida.');
+        }
       });
+    } 
+    else {
+      startModalEmptyEmail()
+    } 
   });
+
+  // Modal para campo de e-mail vazio
+  function startModalEmptyEmail() {
+    const modalEmail = login.querySelector('#modal-email')
+    if (modalEmail) {
+      modalEmail.classList.add('show-modal')
+
+      modalEmail.addEventListener('click', (e) => {
+        if(e.target.id == 'modal-email' || e.target.className == 'btn-modal btn-ok') {
+          modalEmail.classList.remove('show-modal')
+        }
+      })
+    }
+  }
 
   // BOTÃO PARA MUDAR PARA A PAGINA DE CADASTRO APÓS O CARREGAMENTO DA PAGINA
   signUpButton.addEventListener('click', (e) => {
