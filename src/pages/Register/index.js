@@ -67,8 +67,9 @@ export default () => {
           emailError.innerHTML = 'E-mail já cadastrado.'
         }
         else if (errorCode === 'auth/invalid-email') {
+          console.log(errorCode)
           emailError.style.color = 'red';
-          emailError.innerHTML = 'Formato de e-mail inválido.'
+          emailError.innerHTML = 'Insira um e-mail inválido.'
         }
       })
   });
