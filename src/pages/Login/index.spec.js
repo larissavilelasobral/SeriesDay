@@ -1,42 +1,33 @@
-import { Login } from './index.js';
+import Login from './index.js';
 import * as services from '../../services/index.js';
 
-services.googleLogin = jest.fn(() => Promise.resolve(true))
+services.googleLogin = jest.fn(() => Promise.resolve(true));
 services.registerUser = jest.fn(() => Promise.resolve(true));
 
-  describe('Login', () => {
-    it('should be a function', () => {
-      expect(typeof Login).toBe('function');
-    });
-  
-    it('should load the page', () => {
-      expect(Login()).toMatchSnapshot();
-    });
-  
-    // it('When the user clicks the button, he should call sign with email and password', () => {
-    //   Login().querySelector('#button-login').dispatchEvent(new Event('click'));
-    //   expect(services.signIn).toHaveBeenCalled();
-    // });
-  
-    // it('When the user clicks the button he should call sign with google account', () => {
-    //   Login().querySelector('#button-google').dispatchEvent(new Event('click'));
-    //   expect(services.loginWithGoogle).toHaveBeenCalled();
-    // });
-  
-    // it('When the user clicks the button, they should redirect to the registration page', () => {
-    //   Login().querySelector('#button-create-account').dispatchEvent(new Event('click'));
-    //   expect(utils.onNavigate).toHaveBeenCalledWith('/register');
-    // });
+describe('Login', () => {
+  it('should be a function', () => {
+    expect(typeof Login).toBe('function');
   });
 
+  it('should load the page', () => {
+    expect(Login()).toMatchSnapshot();
+  });
 
+  // it('When the user clicks the button, he should call sign with email and password', () => {
+  //   Login().querySelector('#button-login').dispatchEvent(new Event('click'));
+  //   expect(services.signIn).toHaveBeenCalled();
+  // });
 
+  // it('When the user clicks the button he should call sign with google account', () => {
+  //   Login().querySelector('#button-google').dispatchEvent(new Event('click'));
+  //   expect(services.loginWithGoogle).toHaveBeenCalled();
+  // });
 
-
-
-
-
-
+  // it('When the user clicks the button, they should redirect to the registration page', () => {
+  //   Login().querySelector('#button-create-account').dispatchEvent(new Event('click'));
+  //   expect(utils.onNavigate).toHaveBeenCalledWith('/register');
+  // });
+});
 
 //   describe('Login', () => {
 //     it('should be a function', () => {
@@ -58,17 +49,11 @@ services.registerUser = jest.fn(() => Promise.resolve(true));
 //       expect(services.googleLogin).toHaveBeenCalled();
 //       expect(services.googleLogin()).toBe(true);
 //     });
-    
 //     it('should have a button with click event to redirect user to sign up page', () => {
 //       Login().querySelector('#sign-up-login').dispatchEvent(new Event('click'));
 //       expect(utils.onNavigate).toBeCalledWith('/signup');
 //     });
 //   });
-
-
-
-
-
 
 // importamos a função que vamos testar
 // import { myFunction } from '../src/lib/index';
@@ -78,7 +63,6 @@ services.registerUser = jest.fn(() => Promise.resolve(true));
 //     expect(typeof myFunction).toBe('function');
 //   });
 // });
-
 
 /*
 import { registerAccount } from '../src/lib/auth.js';
@@ -91,5 +75,5 @@ describe('Register', () => {
     registerAccount();
     expect(firebase.auth().createUserWithEmailAndPassword()).toBeCalled();
   });
-}); 
+});
 */

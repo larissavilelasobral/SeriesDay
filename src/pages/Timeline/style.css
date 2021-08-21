@@ -299,7 +299,7 @@ input[type='file'] {
 }
 
 .title {
-    font-family: "Aquatico";
+    font-family: Aquatico, sans-serif;
     font-size: 15pt;
     color: beige;
 }
@@ -554,7 +554,7 @@ input[type='file'] {
     }
     
     .title {
-        font-family: "Aquatico";
+        font-family: Aquatico, sans-serif;
         font-size: 1.8em;
     }
     
@@ -596,10 +596,6 @@ input[type='file'] {
     .post-container {
         width: 100%;
         margin: 0;
-    }
-
-    .post-button {
-        margin-left: 75%;
     }
 
     .desktop-signout-button {

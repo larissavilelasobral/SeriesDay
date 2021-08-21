@@ -1,6 +1,6 @@
 import { googleLogin } from '../../services/index.js';
 
-export default () => {
+export default function Login() {
   const login = document.createElement('div');
   login.innerHTML = `
     <link rel="stylesheet" href="./pages/Login/style.css" />
@@ -110,4 +110,4 @@ export default () => {
     googleLogin(provider);
   });
   return login;
-};
+}
