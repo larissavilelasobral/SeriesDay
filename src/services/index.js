@@ -25,22 +25,6 @@ export const signOut = () => {
   window.location.reload();
 };
 
-const postsCollection = firebase.firestore().collection('posts');
-
-export const deletePost = (id) => {
-  postsCollection
-    .doc(id)
-    .delete();
-};
-
-export const editPost = (newPost, id) => {
-  postsCollection
-    .doc(id)
-    .update({
-      text: newPost,
-    });
-};
-
 export const saveUserUpdate = (name) => {
   firebase.auth().currentUser.updateProfile({
     displayName: name,
@@ -62,3 +46,6 @@ export const saveUser = (user, userEmail, userName) => {
 
 export const registerUser = (email, password) => firebase.auth()
   .createUserWithEmailAndPassword(email, password);
+
+export const signIn = (email, password) => firebase
+  .auth().signInWithEmailAndPassword(email, password);

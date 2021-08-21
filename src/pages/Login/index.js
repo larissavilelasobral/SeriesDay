@@ -1,4 +1,4 @@
-import { googleLogin } from '../../services/index.js';
+import { googleLogin, signIn } from '../../services/index.js';
 
 export default function Login() {
   const login = document.createElement('div');
@@ -74,9 +74,7 @@ export default function Login() {
   signInButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (email.value) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email.value, password.value)
+      signIn(email.value, password.value)
         .then(() => {
           window.location.hash = 'timeline'; // ir para o feed
         })

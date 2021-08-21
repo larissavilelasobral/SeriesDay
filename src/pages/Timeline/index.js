@@ -1,7 +1,9 @@
-import { signOut, deletePost, editPost } from '../../services/index.js';
+import { signOut } from '../../services/index.js';
 
 export default () => {
   const user = firebase.auth().currentUser;
+  // Criando coleção no firebase chamada 'posts'
+  const postsCollection = firebase.firestore().collection('posts');
 
   if (!user) {
     signOut();
@@ -224,6 +226,20 @@ export default () => {
 
     const deleteConfirmation = timeline.querySelectorAll('#delete-confirmation');
 
+    function deletePost(id) {
+      postsCollection
+        .doc(id)
+        .delete();
+    }
+
+    function editPost(newPost, id) {
+      postsCollection
+        .doc(id)
+        .update({
+          text: newPost,
+        });
+    }
+
     // eslint-disable-next-line no-restricted-syntax
     for (const button of deleteConfirmation) {
       button.addEventListener('click', (event) => {
@@ -377,9 +393,6 @@ export default () => {
       }
     }
   }
-
-  // Criando coleção no firebase chamada 'posts'
-  const postsCollection = firebase.firestore().collection('posts');
 
   // Mostrando os posts na tela
   function loadPosts() {

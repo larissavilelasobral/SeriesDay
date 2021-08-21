@@ -1,6 +1,7 @@
 import Login from './index.js';
 import * as services from '../../services/index.js';
 
+services.signIn = jest.fn(() => Promise.resolve(true));
 services.googleLogin = jest.fn(() => Promise.resolve(true));
 services.registerUser = jest.fn(() => Promise.resolve(true));
 
@@ -9,9 +10,14 @@ describe('Login', () => {
     expect(typeof Login).toBe('function');
   });
 
-  it('should load the page', () => {
-    expect(Login()).toMatchSnapshot();
+  it('shold call firebase', () => {
+    services.signIn();
+    expect(firebase.auth().createUserWithEmailAndPassword()).toBeCalled();
   });
+
+  // it('should load the page', () => {
+  //   expect(Login()).toMatchSnapshot();
+  // });
 
   // it('When the user clicks the button, he should call sign with email and password', () => {
   //   Login().querySelector('#button-login').dispatchEvent(new Event('click'));
