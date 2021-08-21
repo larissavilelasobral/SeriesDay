@@ -69,7 +69,7 @@ export default () => {
         else if (errorCode === 'auth/invalid-email') {
           console.log(errorCode)
           emailError.style.color = 'red';
-          emailError.innerHTML = 'Insira um e-mail inválido'
+          emailError.innerHTML = 'Insira um e-mail válido'
         }
       })
   });

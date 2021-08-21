@@ -252,40 +252,61 @@ export default () => {
    
 
     // Curtir e descurtir posts
-    function likePost(id) {
-      const promiseLikes = postsCollection
-        .doc(id)
-        .get()
-        .then((post) => {
-          const countLikes = post.data().likes;
-          if (countLikes >= 1) {
-            postsCollection
-              .doc(id)
-              .update({
-                likes: post.data().likes - 1,
-              })
-              .then(() => {
-                loadPosts();
-              });
-          } else {
-            postsCollection
-              .doc(id)
-              .update({
-                likes: post.data().likes + 1,
-              })
-              .then(() => {
-                loadPosts();
-              });
-          }
-        });
-      return promiseLikes.then();
+    const likesCounterFirebase = [];
+    const likesCounterPage = [];
+
+    function likePost(idPost, id, button) {
+      const verificador = likesCounterFirebase.includes(idPost);
+
+      const db = firebase.firestore();
+      const like = db.collection('posts').doc(idPost);
+      const currentLikes = button.textContent.trim();
+
+      if (verificador === false) {
+        likesCounterFirebase.push(idPost);
+        likesCounterPage.push(idPost);
+        console.log(likesCounterPage)
+
+        console.log(`vc deu like: ${likesCounterFirebase}`)
+        like.update({likes: firebase.firestore.FieldValue.increment(1)})
+        addLikesOnPage(id, button,currentLikes)
+      } else {
+        const id = likesCounterFirebase.indexOf(idPost);
+        likesCounterFirebase.splice(id,1);
+        const idPage = likesCounterPage.indexOf(idPost);
+        likesCounterPage.splice(idPage,1);
+
+        like.update({likes: firebase.firestore.FieldValue.increment(-1)})
+        console.log(`vc deu deslike: ${likesCounterFirebase}`)
+        unlikesOnPage(id, button, currentLikes)
+      }
+
+      function addLikesOnPage(id, button, currentLikes){
+        const quantidadeElementos = likesCounterPage.filter(x => x === id).length+1;
+        console.log(quantidadeElementos)
+
+        console.log(currentLikes)
+        const addLike = parseInt(currentLikes) + parseInt(quantidadeElementos)
+        const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
+        button.innerHTML = `${img} ${addLike}` 
+      }
+
+      function unlikesOnPage(id, button, currentLikes){
+        const quantidadeElementosTirar = likesCounterPage.filter(x => x === id).length-1;
+        console.log(quantidadeElementosTirar)
+
+        console.log(currentLikes)
+        const addUnlike = parseInt(currentLikes) + parseInt(quantidadeElementosTirar)
+        const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
+        button.innerHTML = `${img} ${addUnlike}` 
+      }
     }
 
     const likeButtons = postBox.querySelectorAll('.likePost-btn');
 
     for (const button of likeButtons) {
       button.addEventListener('click', (event) => {
-        likePost(event.currentTarget.parentNode.id);
+        likePost(event.currentTarget.parentNode.id, event.target.id, button);
       });
     }
 
@@ -358,12 +379,6 @@ export default () => {
         editVisilibity.classList.remove('visibility-hidden');
       }
     }
-
-    for (const likeVisilibity of likeButtons) {
-      if (firebase.auth().currentUser.email === postUser.data().email) {
-        likeVisilibity.classList.add('visibility-hidden'); 
-      }
-    } 
   }
 
   // Adicionando foto do perfil (MOBILE)
