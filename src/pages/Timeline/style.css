@@ -460,6 +460,14 @@ input[type='file'] {
 
 /*RESPONSIVIDADE TABLET*/
 @media screen and (min-width: 768px) {
+    body {
+        background-image: url(../../assets/background-desktop.png);
+        background-size: cover;
+        background-attachment: fixed;
+        background-color: #15141f;
+        overflow-x: hidden;
+    }
+
     .banner-menu {
         height: 80px;
     }
@@ -541,14 +549,6 @@ input[type='file'] {
 
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
-    body {
-        background-image: url(../../assets/background-desktop.png);
-        background-size: cover;
-        background-attachment: fixed;
-        background-color: #15141f;
-        overflow-x: hidden;
-    }
-
     .title-container {
         margin: 0 0 0 1%;
     }
