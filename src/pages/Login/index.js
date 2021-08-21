@@ -56,45 +56,44 @@ export default () => {
   const signInButton = login.querySelector('#signin-button');
   const signUpButton = login.querySelector('#signup-button');
 
+  // Modal para campo de e-mail vazio
+  function startModalEmptyEmail() {
+    const modalEmail = login.querySelector('#modal-email');
+    if (modalEmail) {
+      modalEmail.classList.add('show-modal');
+
+      modalEmail.addEventListener('click', (e) => {
+        if (e.target.id === 'modal-email' || e.target.className === 'btn-modal btn-ok') {
+          modalEmail.classList.remove('show-modal');
+        }
+      });
+    }
+  }
+
   // LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
   signInButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (email.value) {
-      firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        window.location.hash = 'timeline'; // ir para o feed
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        if (errorCode === 'auth/invalid-email') {
-          loginError.style.color = 'red';
-          loginError.innerHTML = ('Não há registro de usuário correspondente a este e-mail');
-        }
-        else if (errorCode === 'auth/wrong-password') {
-          loginError.style.color = 'red';
-          loginError.innerHTML = ('Senha inválida');
-        }
-      });
-    } 
-    else {
-      startModalEmptyEmail()
-    } 
-  });
-
-  // Modal para campo de e-mail vazio
-  function startModalEmptyEmail() {
-    const modalEmail = login.querySelector('#modal-email')
-    if (modalEmail) {
-      modalEmail.classList.add('show-modal')
-
-      modalEmail.addEventListener('click', (e) => {
-        if(e.target.id == 'modal-email' || e.target.className == 'btn-modal btn-ok') {
-          modalEmail.classList.remove('show-modal')
-        }
-      })
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email.value, password.value)
+        .then(() => {
+          window.location.hash = 'timeline'; // ir para o feed
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          if (errorCode === 'auth/invalid-email') {
+            loginError.style.color = 'red"';
+            loginError.innerHTML = 'Não há registro de usuário correspondente a este e-mail';
+          } else if (errorCode === 'auth/wrong-password') {
+            loginError.style.color = 'red';
+            loginError.innerHTML = 'Senha inválida';
+          }
+        });
+    } else {
+      startModalEmptyEmail();
     }
-  }
+  });
 
   // BOTÃO PARA MUDAR PARA A PAGINA DE CADASTRO APÓS O CARREGAMENTO DA PAGINA
   signUpButton.addEventListener('click', (e) => {

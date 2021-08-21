@@ -110,66 +110,45 @@ export default () => {
   });
 
   // Sair da conta do usuário (DESKTOP)
-  timeline.querySelector('.desktop-signout-button').addEventListener('click', (e) => {
-    e.preventDefault();
-    signOut();
-  });
+  timeline
+    .querySelector('.desktop-signout-button')
+    .addEventListener('click', (e) => {
+      e.preventDefault();
+      signOut();
+    });
 
   // Manipulando os modais
   function startModalDelete() {
-    const modalDelete = timeline.querySelector('#modal-delete')
-    if(modalDelete){
-      modalDelete.classList.add('show-modal')
+    const modalDelete = timeline.querySelector('#modal-delete');
+    if (modalDelete) {
+      modalDelete.classList.add('show-modal');
 
       modalDelete.addEventListener('click', (e) => {
-        if(e.target.id == 'modal-delete' || e.target.className == 'btn-modal btn-cancel') {
-          modalDelete.classList.remove('show-modal')
+        if (
+          e.target.id === 'modal-delete'
+          || e.target.className === 'btn-modal btn-cancel'
+        ) {
+          modalDelete.classList.remove('show-modal');
         }
-      })
+      });
     }
   }
 
   function startModalPublish() {
-    const modalPublish = timeline.querySelector('#modal-publish')
+    const modalPublish = timeline.querySelector('#modal-publish');
     if (modalPublish) {
-      modalPublish.classList.add('show-modal')
+      modalPublish.classList.add('show-modal');
 
       modalPublish.addEventListener('click', (e) => {
-        if(e.target.id == 'modal-publish' || e.target.className == 'btn-modal btn-ok') {
-          modalPublish.classList.remove('show-modal')
+        if (
+          e.target.id === 'modal-publish'
+          || e.target.className === 'btn-modal btn-ok'
+        ) {
+          modalPublish.classList.remove('show-modal');
         }
-      })
+      });
     }
   }
-
-  // Criando coleção no firebase chamada 'posts'
-  const postsCollection = firebase.firestore().collection('posts');
-
-  // Enviando posts para o firestore
-  timeline.querySelector('#postForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const text = timeline.querySelector('#postText').value;
-
-    if (text) {
-      const getDate = () => {
-        const date = new Date();
-        return date.toLocaleString('pt-BR');
-      };
-      const post = {
-        text,
-        likes: 0,
-        date: getDate(),
-        id: user.uid,
-        email: user.email,
-      };
-      postsCollection.add(post).then(() => {
-        timeline.querySelector('#postText').value = '';
-        loadPosts();
-      });
-    } else {
-      startModalPublish();
-    }
-  });
 
   // Adicionando posts
   function createTemplatePost(post, postUser) {
@@ -177,7 +156,7 @@ export default () => {
       <li data-templatepost class="posts-box">
         <div id="${post.id}"class="post-container">
           <div class="user-container">
-            <img id="photo-profile" src="${(postUser.data().photo) !== '' ? postUser.data().photo : '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
+            <img id="photo-profile" src="${postUser.data().photo !== '' ? postUser.data().photo : '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
             <div class="username-date-container">
               <p class="username"> ${postUser.data().name || 'Usuário Anônimo'} </p>
               <time class="date">${post.data().date}</time>
@@ -233,23 +212,24 @@ export default () => {
 
     // Deletar posts
     const deleteButtons = postBox.querySelectorAll('.deletePost-btn');
+    // eslint-disable-next-line no-restricted-syntax
     for (const button of deleteButtons) {
       button.addEventListener('click', (event) => {
-        event.preventDefault()
-        startModalDelete()
+        event.preventDefault();
+        startModalDelete();
       });
     }
 
     const deleteConfirmation = timeline.querySelectorAll('#delete-confirmation');
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const button of deleteConfirmation) {
       button.addEventListener('click', (event) => {
-        event.preventDefault()
+        event.preventDefault();
         deletePost(event.currentTarget.parentNode.id);
         loadPosts();
-      })
+      });
     }
-   
 
     // Curtir e descurtir posts
     const likesCounterFirebase = [];
@@ -262,41 +242,47 @@ export default () => {
       const like = db.collection('posts').doc(idPost);
       const currentLikes = button.textContent.trim();
 
+      // eslint-disable-next-line no-shadow
+      function addLikesOnPage(id, button, currentLikes) {
+        const quantidadeElementos = likesCounterPage.filter((x) => x === id).length + 1;
+
+        const addLike = parseInt(currentLikes, 10) + parseInt(quantidadeElementos, 10);
+        const img = '<img src=\'./assets/heart.png\' alt="Ícone de Coração">';
+        // eslint-disable-next-line no-param-reassign
+        button.innerHTML = `${img} ${addLike}`;
+      }
+
+      // eslint-disable-next-line no-shadow
+      function unlikesOnPage(id, button, currentLikes) {
+        const quantidadeElementosTirar = likesCounterPage.filter((x) => x === id).length - 1;
+
+        const addUnlike = parseInt(currentLikes, 10) + parseInt(quantidadeElementosTirar, 10);
+        const img = '<img src=\'./assets/heart.png\' alt=\'Ícone de Coração\'>';
+        // eslint-disable-next-line no-param-reassign
+        button.innerHTML = `${img} ${addUnlike}`;
+      }
+
       if (verificador === false) {
         likesCounterFirebase.push(idPost);
         likesCounterPage.push(idPost);
-        
-        like.update({likes: firebase.firestore.FieldValue.increment(1)})
-        addLikesOnPage(id, button,currentLikes)
+
+        like.update({ likes: firebase.firestore.FieldValue.increment(1) });
+        addLikesOnPage(id, button, currentLikes);
       } else {
+        // eslint-disable-next-line no-shadow
         const id = likesCounterFirebase.indexOf(idPost);
-        likesCounterFirebase.splice(id,1);
+        likesCounterFirebase.splice(id, 1);
         const idPage = likesCounterPage.indexOf(idPost);
-        likesCounterPage.splice(idPage,1);
+        likesCounterPage.splice(idPage, 1);
 
-        like.update({likes: firebase.firestore.FieldValue.increment(-1)})
-        unlikesOnPage(id, button, currentLikes)
-      }
-
-      function addLikesOnPage(id, button, currentLikes){
-        const quantidadeElementos = likesCounterPage.filter(x => x === id).length+1;
-      
-        const addLike = parseInt(currentLikes) + parseInt(quantidadeElementos)
-        const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
-        button.innerHTML = `${img} ${addLike}` 
-      }
-
-      function unlikesOnPage(id, button, currentLikes){
-        const quantidadeElementosTirar = likesCounterPage.filter(x => x === id).length-1;
-        
-        const addUnlike = parseInt(currentLikes) + parseInt(quantidadeElementosTirar)
-        const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
-        button.innerHTML = `${img} ${addUnlike}` 
+        like.update({ likes: firebase.firestore.FieldValue.increment(-1) });
+        unlikesOnPage(id, button, currentLikes);
       }
     }
 
     const likeButtons = postBox.querySelectorAll('.likePost-btn');
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const button of likeButtons) {
       button.addEventListener('click', (event) => {
         likePost(event.currentTarget.parentNode.id, event.target.id, button);
@@ -308,11 +294,16 @@ export default () => {
 
     function openEditPost(element) {
       element.querySelector('.edited-post').classList.remove('display-none');
-      element.querySelector('.save-edit-button').classList.remove('display-none');
-      element.querySelector('.close-edit-button').classList.remove('display-none');
+      element
+        .querySelector('.save-edit-button')
+        .classList.remove('display-none');
+      element
+        .querySelector('.close-edit-button')
+        .classList.remove('display-none');
       element.querySelector('.edit-container').classList.remove('display-none');
     }
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const openEdit of postLi) {
       openEdit.addEventListener('click', (e) => {
         const target = e.target;
@@ -328,9 +319,11 @@ export default () => {
       element.querySelector('.save-edit-button').classList.add('display-none');
       element.querySelector('.close-edit-button').classList.add('display-none');
       element.querySelector('.edit-container').classList.add('display-none');
+      // eslint-disable-next-line no-param-reassign
       element.querySelector('.empty-text').innerHTML = '';
     }
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const closeEdit of postLi) {
       closeEdit.addEventListener('click', (e) => {
         const target = e.target;
@@ -340,6 +333,7 @@ export default () => {
       });
     }
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const buttonSave of postLi) {
       buttonSave.addEventListener('click', (e) => {
         const editedPost = buttonSave.querySelector('.edited-post').value;
@@ -359,18 +353,20 @@ export default () => {
     }
 
     // Visibilidade dos botões de editar, deletar e curtir
+    // eslint-disable-next-line no-restricted-syntax
     for (const deleteVisilibity of deleteButtons) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
         deleteVisilibity.classList.remove('visibility-hidden');
-        }
       }
-      
-    const editPencil = timeline.querySelectorAll('.editPost-btn')
+    }
+
+    const editPencil = timeline.querySelectorAll('.editPost-btn');
 
     // console.log(firebase.auth().currentUser.email === postUser.data().email)
-    console.log(firebase.auth().currentUser.email)
-    console.log(postUser.data().email)
+    // console.log(firebase.auth().currentUser.email);
+    // console.log(postUser.data().email);
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const editVisilibity of editPencil) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
         editVisilibity.classList.remove('visibility-hidden');
@@ -378,12 +374,63 @@ export default () => {
     }
   }
 
+  // Criando coleção no firebase chamada 'posts'
+  const postsCollection = firebase.firestore().collection('posts');
+
+  // Mostrando os posts na tela
+  function loadPosts() {
+    timeline.querySelector('#posts').innerHTML = '<span class="font-work">Carregando posts...</span>';
+
+    postsCollection
+      .orderBy('date', 'desc')
+      .get()
+      .then((snap) => {
+        timeline.querySelector('#posts').innerHTML = '';
+        snap.forEach((post) => {
+          const usersCollection = firebase
+            .firestore()
+            .collection('users')
+            .doc(post.data().email);
+          usersCollection.get().then((postUser) => {
+            createTemplatePost(post, postUser);
+          });
+        });
+      });
+  }
+
+  loadPosts();
+
+  // Enviando posts para o firestore
+  timeline.querySelector('#postForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const text = timeline.querySelector('#postText').value;
+
+    if (text) {
+      const getDate = () => {
+        const date = new Date();
+        return date.toLocaleString('pt-BR');
+      };
+      const post = {
+        text,
+        likes: 0,
+        date: getDate(),
+        id: user.uid,
+        email: user.email,
+      };
+      postsCollection.add(post).then(() => {
+        timeline.querySelector('#postText').value = '';
+        loadPosts();
+      });
+    } else {
+      startModalPublish();
+    }
+  });
+
   // Adicionando foto do perfil (MOBILE)
   const photoMsgMobile = timeline.querySelector('#photo-message-mobile');
   const uploadImage = timeline.querySelector('#uploadImage');
 
   uploadImage.addEventListener('click', () => {
-   
     photoMsgMobile.innerHTML = 'Carregando imagem...';
 
     const ref = firebase.storage().ref();
@@ -400,29 +447,33 @@ export default () => {
         image.src = url;
         const currentUserUp = firebase.auth().currentUser;
         currentUserUp.updateProfile({
-          photoURL: url
+          photoURL: url,
         });
 
         postsCollection.get().then((snap) => {
+          // eslint-disable-next-line consistent-return
           snap.forEach((post) => {
             const currentUser = firebase.auth().currentUser;
-            
+
             if (post.data().email === currentUser.email) {
-              const userUp = firebase.firestore().collection('users').doc(post.data().email)
-              return userUp.update({
-                photo: url
-              })
-              .then(()=> {
-                photoMsgMobile.innerHTML = '';
-                window.location.reload();
-              })
-              .catch((error) => {
-                console.error("Error updating document: ", error);
-              })
+              const userUp = firebase
+                .firestore()
+                .collection('users')
+                .doc(post.data().email);
+              return userUp
+                .update({
+                  photo: url,
+                })
+                .then(() => {
+                  photoMsgMobile.innerHTML = '';
+                  window.location.reload();
+                })
+                .catch((error) => {
+                  console.error('Error updating document: ', error);
+                });
             }
-          })
-        })
- 
+          });
+        });
       });
   });
 
@@ -431,7 +482,6 @@ export default () => {
   const uploadImageDestkop = timeline.querySelector('.desktop-upload-image');
 
   uploadImageDestkop.addEventListener('click', () => {
-
     photoMsgDesktop.innerHTML = 'Carregando imagem...';
 
     const ref = firebase.storage().ref();
@@ -449,47 +499,34 @@ export default () => {
         image.src = url;
         const currentUserUp = firebase.auth().currentUser;
         currentUserUp.updateProfile({
-          photoURL: url
+          photoURL: url,
         });
         postsCollection.get().then((snap) => {
+          // eslint-disable-next-line consistent-return
           snap.forEach((post) => {
             const currentUser = firebase.auth().currentUser;
 
             if (post.data().email === currentUser.email) {
-              const userUp = firebase.firestore().collection('users').doc(post.data().email)
-              return userUp.update({
-                photo: url
-              })
-              .then(()=> {
-                photoMsgDesktop.innerHTML = '';
-                window.location.reload();
-              })
-              .catch((error) => {
-                console.error("Error updating document: ", error);
-              })
+              const userUp = firebase
+                .firestore()
+                .collection('users')
+                .doc(post.data().email);
+              return userUp
+                .update({
+                  photo: url,
+                })
+                .then(() => {
+                  photoMsgDesktop.innerHTML = '';
+                  window.location.reload();
+                })
+                .catch((error) => {
+                  console.error('Error updating document: ', error);
+                });
             }
-          })
-        })
-    })
-    
-  });
-
-  // Mostrando os posts na tela
-  function loadPosts() {
-    timeline.querySelector('#posts').innerHTML = '<span class="font-work">Carregando posts...</span>';
-
-    postsCollection.orderBy('date', 'desc').get().then((snap) => {
-      timeline.querySelector('#posts').innerHTML = '';
-      snap.forEach((post) => {
-        const usersCollection = firebase.firestore().collection('users').doc(post.data().email);
-        usersCollection.get().then((postUser) => {
-          createTemplatePost(post, postUser);
+          });
         });
       });
-    });
-  }
-
-  loadPosts();
+  });
 
   return timeline;
 };
