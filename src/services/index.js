@@ -50,7 +50,7 @@ export const saveUserUpdate = (name) => {
 
 export const saveUser = (user, userEmail, userName) => {
   firebase.firestore().collection('users').doc(userEmail).set({
-    userId: user.uid,
+    id: user.uid,
     name: userName,
     email: userEmail,
     photo: ''

@@ -265,9 +265,7 @@ export default () => {
       if (verificador === false) {
         likesCounterFirebase.push(idPost);
         likesCounterPage.push(idPost);
-        console.log(likesCounterPage)
-
-        console.log(`vc deu like: ${likesCounterFirebase}`)
+        
         like.update({likes: firebase.firestore.FieldValue.increment(1)})
         addLikesOnPage(id, button,currentLikes)
       } else {
@@ -277,15 +275,12 @@ export default () => {
         likesCounterPage.splice(idPage,1);
 
         like.update({likes: firebase.firestore.FieldValue.increment(-1)})
-        console.log(`vc deu deslike: ${likesCounterFirebase}`)
         unlikesOnPage(id, button, currentLikes)
       }
 
       function addLikesOnPage(id, button, currentLikes){
         const quantidadeElementos = likesCounterPage.filter(x => x === id).length+1;
-        console.log(quantidadeElementos)
-
-        console.log(currentLikes)
+      
         const addLike = parseInt(currentLikes) + parseInt(quantidadeElementos)
         const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
         button.innerHTML = `${img} ${addLike}` 
@@ -293,9 +288,7 @@ export default () => {
 
       function unlikesOnPage(id, button, currentLikes){
         const quantidadeElementosTirar = likesCounterPage.filter(x => x === id).length-1;
-        console.log(quantidadeElementosTirar)
-
-        console.log(currentLikes)
+        
         const addUnlike = parseInt(currentLikes) + parseInt(quantidadeElementosTirar)
         const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
         button.innerHTML = `${img} ${addUnlike}` 
@@ -369,10 +362,14 @@ export default () => {
     for (const deleteVisilibity of deleteButtons) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
         deleteVisilibity.classList.remove('visibility-hidden');
+        }
       }
-    }
-
+      
     const editPencil = timeline.querySelectorAll('.editPost-btn')
+
+    // console.log(firebase.auth().currentUser.email === postUser.data().email)
+    console.log(firebase.auth().currentUser.email)
+    console.log(postUser.data().email)
 
     for (const editVisilibity of editPencil) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
