@@ -37,6 +37,7 @@ export default () => {
           <div class="photo-buttons">
             <label class="labelfile font-work"for="photo">Selecionar Imagem</label>
             <span class="photo-tooltiptext font-work"> Tamanho ideal da foto: 96x96 </span>
+            <span class="photo-error font-work"></span>
 
             <input type="file" id="photo" class="input-img" accept=".jpg, .jpeg, .png">
             <button id="uploadImage" class="enviar-button destkop-upload-image font-work">Enviar</button>
@@ -75,6 +76,7 @@ export default () => {
       <div class="desktop-photo-buttons">
         <label class="labelfile font-work" for="photo">Selecionar Imagem</label>
         <span class="photo-tooltiptext font-work"> Tamanho ideal da foto: 96x96 </span>
+        <span class="photo-error-desktop font-work"></span>
 
         <input type="file" id="photo" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
         <button id="uploadImage" class="enviar-button font-work desktop-upload-image">Enviar</button>
@@ -227,6 +229,7 @@ export default () => {
       button.addEventListener('click', (event) => {
         event.preventDefault();
         deletePost(event.currentTarget.parentNode.id);
+        // eslint-disable-next-line no-use-before-define
         loadPosts();
       });
     }
@@ -342,6 +345,7 @@ export default () => {
           e.preventDefault();
           if (editedPost) {
             editPost(editedPost, e.target.parentNode.id);
+            // eslint-disable-next-line no-use-before-define
             loadPosts();
           } else {
             const emptyText = buttonSave.querySelector('.empty-text');
@@ -468,8 +472,10 @@ export default () => {
                   photoMsgMobile.innerHTML = '';
                   window.location.reload();
                 })
-                .catch((error) => {
-                  console.error('Error updating document: ', error);
+                .catch(() => {
+                  const photoError = timeline.querySelector('.photo-error');
+                  photoError.style.color = 'red';
+                  photoError.innerHTML = 'Erro ao carregar a foto';
                 });
             }
           });
@@ -519,8 +525,10 @@ export default () => {
                   photoMsgDesktop.innerHTML = '';
                   window.location.reload();
                 })
-                .catch((error) => {
-                  console.error('Error updating document: ', error);
+                .catch(() => {
+                  const photoError = timeline.querySelector('.photo-error-desktop');
+                  photoError.style.color = 'red';
+                  photoError.innerHTML = 'Erro ao carregar a foto';
                 });
             }
           });

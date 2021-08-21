@@ -1,6 +1,6 @@
-import timeline from './pages/Timeline/index.js'
-import login from './pages/Login/index.js'
-import register from './pages/Register/index.js'
+import timeline from './pages/Timeline/index.js';
+import login from './pages/Login/index.js';
+import register from './pages/Register/index.js';
 
 const container = document.querySelector('#root');
 
@@ -37,10 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.app();
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        window.location.hash = 'timeline'
+        window.location.hash = 'timeline';
       }
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e);
     loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
   }

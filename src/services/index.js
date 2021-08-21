@@ -13,6 +13,7 @@ export const googleLogin = (provider) => {
     .catch((error) => {
       const errorCode = error.code;
       if (errorCode === 'auth/account-exists-with-different-credential') {
+        // eslint-disable-next-line no-alert
         alert('Essa conta já existe com uma credencial diferente');
       }
     });
@@ -21,7 +22,7 @@ export const googleLogin = (provider) => {
 export const signOut = () => {
   firebase.auth().signOut();
   window.location.hash = '';
-  location.reload();
+  window.location.reload();
 };
 
 const postsCollection = firebase.firestore().collection('posts');
@@ -42,7 +43,7 @@ export const editPost = (newPost, id) => {
 
 export const saveUserUpdate = (name) => {
   firebase.auth().currentUser.updateProfile({
-    displayName: name
+    displayName: name,
   })
     .then(() => true)
     .catch((error) => error);
@@ -53,7 +54,7 @@ export const saveUser = (user, userEmail, userName) => {
     id: user.uid,
     name: userName,
     email: userEmail,
-    photo: ''
+    photo: '',
   })
     .then(() => true)
     .catch((error) => error);
