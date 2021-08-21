@@ -58,9 +58,9 @@ body {
 .banner-menu {
     position: fixed;
     padding: 10px 10px 20px 10px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
-    background-color: #15141f;
     width: 100%;
+    background-color: #15141f;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .buttons {
@@ -258,7 +258,6 @@ input[type='file'] {
 .user-photo-menu {
     width: 100px;
     border-radius: 50%;
-    border: solid 3px #000;
 }
 
 .email-menu {
@@ -408,7 +407,7 @@ input[type='file'] {
 }
 
 .post-button:hover {
-    background-color: #B8824C;
+    background-color: #FFCC10;
 }
 
 .buttons-container {
@@ -444,7 +443,6 @@ input[type='file'] {
 .user-photo {
     width: 12%;
     border-radius: 50%;
-    border: solid 1px #000;
 }
 
 .username-date-container {
@@ -494,10 +492,11 @@ input[type='file'] {
         display: flex;
         width: 100%;
         justify-content: flex-start;
-        margin: -10px 0 0 -9px;
+        margin: -10px 0 0 -11px;
         position: fixed;
         background-color: #15141f;
         padding: 10px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
     }
 
     .banner img{

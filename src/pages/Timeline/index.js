@@ -53,7 +53,7 @@ export default () => {
       </div>
 
       <button id="signout-button" class="signout-button buttons">
-        <img src="./assets/exit.png" alt="Ícone de Saída">
+        <img src="./assets/exit-black.png" alt="Ícone de Saída">
       </button>
     </ul>
   </div>
@@ -91,7 +91,7 @@ export default () => {
   </div>
 
   <button id="desktop-signout-button" class="signout-button desktop-signout-button buttons">
-    <img src="./assets/exit.png" alt="Ícone de Saída">
+    <img src="./assets/exit-white.png" alt="Ícone de Saída">
   </button>
 
   <div id="modal-publish" class="modal-publish-container">
