@@ -116,12 +116,6 @@ body {
     border: solid 1px #000;
 }
 
-.password-rules {
-    font-family: "Work Sans", sans-serif;
-    font-weight: bolder;
-    font-size: 0.9em;
-}
-
 
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
@@ -190,6 +184,7 @@ body {
 
     .goback-button img {
         margin-left: -125%;
+        margin-top: -25px;
     }
 }
 

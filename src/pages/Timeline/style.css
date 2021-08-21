@@ -1,7 +1,44 @@
 body {
-    background-color: #15141f;
+    background-color:#990707;
     height: 100%;
     overflow: scroll;
+}
+
+.modal-delete-container, .modal-publish-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-delete-container.show-modal, .modal-publish-container.show-modal {
+    display: flex;
+}
+
+.modal-delete, .modal-publish {
+    background-color: beige;
+    width: 60%;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 30px;
+    border: 8px solid #15141f;
+    border-radius: 5px;
+    box-shadow: 0 0 0 8px beige;
+    text-align: center;
+}
+
+.btn-yes:hover {
+    background-color: #34cb5e;
+}
+
+.btn-cancel:hover {
+    background-color: #990707d8;
 }
 
 .box {
@@ -22,7 +59,7 @@ body {
     position: fixed;
     padding: 10px 10px 20px 10px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
-    background-color: #747272;
+    background-color: #15141f;
     width: 100%;
 }
 
@@ -176,7 +213,6 @@ body {
     padding: 3px 55px 3px 55px;
     cursor: pointer;
     border-radius: 5px;
-    font-family: "Work Sans", sans-serif;
 }
 
 .enviar-button:active{
@@ -192,20 +228,31 @@ input[type='file'] {
     border-radius: 5px;
     color: rgb(148, 148, 148);
     cursor: pointer;
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
     padding: 6px 11px;
     border-style: dashed;
     font-size: 0.3em;
-    font-family: "Work Sans", sans-serif;
 }
 
 .labelfile:hover{
     color: #990707d8;
 }
 
+.photo-tooltiptext {
+    visibility: hidden;
+    margin-bottom: 10px;
+    font-size: 0.3em;
+}
+
+.labelfile:hover + .photo-tooltiptext {
+    visibility: visible;
+    cursor: default;
+}
+
 .username-menu {
     font-family: 'Averia Sans Libre', cursive;
     font-size: 20pt;
+    text-shadow: 2px 2px rgb(88, 88, 88);
 }
 
 .user-photo-menu {
@@ -217,6 +264,7 @@ input[type='file'] {
 .email-menu {
     font-family: 'Averia Sans Libre', cursive;
     font-size: 12pt;
+    font-weight: bold;
 }
 
 .desktop-profile-container {
@@ -254,17 +302,18 @@ input[type='file'] {
 .title {
     font-family: "Aquatico";
     font-size: 15pt;
+    color: beige;
 }
 
 .subtitle {
     font-family: 'Averia Sans Libre', cursive;
     font-size: 10pt;
+    color: beige;
 }
 
 .timeline-buttons {
     border: none;
     background: none;
-    font-family: "Work Sans", sans-serif;
     font-size: 1em;
 }
 
@@ -283,10 +332,10 @@ input[type='file'] {
     border-radius: 5px;
     padding: 3%;
     margin: 0 3% 1% 3%;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .post-textarea {
-    font-family: "Work Sans", sans-serif;
     background-color: ghostwhite;
     border-radius: 5px;
     padding: 2%;
@@ -295,6 +344,7 @@ input[type='file'] {
     margin-top: 30%;
     margin-left: 2%;
     border: 1px solid gray;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .post {
@@ -304,7 +354,6 @@ input[type='file'] {
     border: none;
     resize: none;
     width: 100%;
-    font-family: "Work Sans", sans-serif;
     color:#000;
 }
 
@@ -345,7 +394,6 @@ input[type='file'] {
 }
 
 .empty-text {
-    font-family: "Work Sans", sans-serif;
     font-size: 0.7em;
 }
 
@@ -376,6 +424,7 @@ input[type='file'] {
     border: none;
     background: none;
     cursor: pointer;
+    top: -33px;
 }
 
 .signout-button img {
@@ -406,13 +455,7 @@ input[type='file'] {
     font-size: 9pt;
 }
 
-.loading-post {
-    font-family: "Work Sans", sans-serif;
-}
-
 .photo-message {
-    font-family: "Work Sans", sans-serif;
-    color:#747272;
     margin-top: 5px;
     font-size: 0.25em;
 }
@@ -421,9 +464,9 @@ input[type='file'] {
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
     body {
-        /* background-image: url(../../assets/background-mobile.png);
+        background-image: url(../../assets/background-desktop.png);
         background-size: cover;
-        background-attachment: fixed; */
+        background-attachment: fixed;
         background-color: #15141f;
         overflow-x: hidden;
     }
@@ -444,15 +487,17 @@ input[type='file'] {
     
     .banner-menu {
         height: 70px;
-        margin-bottom: 20%;
+        position: initial;
     }
 
     .banner {
         display: flex;
         width: 100%;
         justify-content: flex-start;
-        margin-bottom: 0;
-        margin-left: 20px;
+        margin: -10px 0 0 -9px;
+        position: fixed;
+        background-color: #15141f;
+        padding: 10px;
     }
 
     .banner img{
@@ -466,7 +511,7 @@ input[type='file'] {
 
     .post-textarea {
         width: 91%;
-        margin: 25% 0 0 4%;
+        margin: 4% 0 0 4%;
     }
 
     .post-container {
@@ -481,16 +526,16 @@ input[type='file'] {
     .desktop-signout-button {
         display: block;
         position: fixed ;
-        top: -4.5%;
+        top: -3.5%;
         left: 82%;
     }
     
     .desktop-signout-button img {
-        width: 10%;
+        width: 7%;
     }
 
     .desktop-profile-container {
-        /* background-image: url(../../assets/background-mobile3.jpg); */
+        /* background-image: url(https://www.xmple.com/wallpaper/solid-color-one-colour-yellow-single-plain-512x512-c-fdefbc-f-24.svg); */
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -502,7 +547,8 @@ input[type='file'] {
         border-radius: 5px;
         padding-top: 70px;
         padding-bottom: 70px;
-        background-color: beige;
+        background-color: #7e7e7e8f;
+        border: 8px solid #15141f;
         box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
     }
 
@@ -533,22 +579,34 @@ input[type='file'] {
     }
 
     .li-post-container {
-        /* background-image: url(../../assets/background-mobile3.jpg); */
+        /* background-image: linear-gradient(rgb(250, 210, 157), #F24E4B, #990707 ); */
         width:40%;
         border-radius: 5px;
         margin-left: 50%;
         padding: 2%;
+        margin-top: 25px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+        background-color: #7e7e7e8f;
     }
 
     .post-form {
-        /* background-image: url(../../assets/background-mobile.png); */
+        /* background-image: url(https://www.xmple.com/wallpaper/linear-yellow-gradient-blue-512x512-c2-ffdab9-afeeee-a-105-f-14.svg); */
+        /* background-image: linear-gradient(#990707, #F24E4B, rgb(250, 210, 157)); */
         width:40%;
         border-radius: 5px;
         margin-left: 50%; 
+        padding: 20px;
+        margin-top: 80px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+        background-color: #7e7e7e8f;
     }
 
     .photo-message {
         font-size: 0.9em;
+    }
+
+    .photo-tooltiptext {
+        font-size: 1em;
     }
 
 }

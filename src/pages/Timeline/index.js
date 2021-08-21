@@ -31,19 +31,21 @@ export default () => {
         <li class="upload-photo">
           <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
 
-          <p class="photo-message" id="photo-message-mobile"></p>
+          <p class="photo-message font-work" id="photo-message-mobile"></p>
 
           <input type="checkbox" id="nope" />
           <div class="photo-buttons">
-            <label class="labelfile"for="photo">Selecionar Imagem</label>
+            <label class="labelfile font-work"for="photo">Selecionar Imagem</label>
+            <span class="photo-tooltiptext font-work"> Tamanho ideal da foto: 96x96 </span>
+
             <input type="file" id="photo" class="input-img" accept=".jpg, .jpeg, .png">
-            <button id="uploadImage" class="enviar-button destkop-upload-image">Enviar</button>
+            <button id="uploadImage" class="enviar-button destkop-upload-image font-work">Enviar</button>
             <label for="nope"></label>
           </div>
           <label class="arrow" for="nope"></label>
         </li>
         <li>
-          <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
+          <p class="username-menu"> <b>${user.displayName || 'Usuário Anônimo'} </b> </p>
         </li>
         <li>
           <p class="email-menu"> ${user.email || 'usuario@email.com'} </p>
@@ -57,7 +59,7 @@ export default () => {
   </div>
   
   <form action="" id="postForm" class="post-form">
-    <textarea type="textarea" id="postText" class="post-textarea" rows="5" cols="50" placeholder="Digite aqui sua review..."></textarea>
+    <textarea type="textarea" id="postText" class="post-textarea font-work" rows="10" cols="100" placeholder="Digite aqui sua review..."></textarea>
     <button type="submit" class="buttons post-button"> Publicar </button>
   </form>
 
@@ -67,19 +69,21 @@ export default () => {
     <li class="upload-photo">
       <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu desktop-preview">
 
-      <p class="photo-message" id="photo-message-desktop"></p>
+      <p class="photo-message font-work" id="photo-message-desktop"></p>
 
       <input type="checkbox" id="desktop-nope" />
       <div class="desktop-photo-buttons">
-        <label class="labelfile"for="photo">Selecionar Imagem</label>
+        <label class="labelfile font-work" for="photo">Selecionar Imagem</label>
+        <span class="photo-tooltiptext font-work"> Tamanho ideal da foto: 96x96 </span>
+
         <input type="file" id="photo" class="input-img desktop-photo" accept=".jpg, .jpeg, .png">
-        <button id="uploadImage" class="enviar-button desktop-upload-image">Enviar</button>
+        <button id="uploadImage" class="enviar-button font-work desktop-upload-image">Enviar</button>
         <label for="desktop-nope"></label>
       </div>
       <label class="arrow" for="desktop-nope"></label>
     </li>
     <li>
-      <p class="username-menu"> <b>${user.displayName || 'Usuário'} </b> </p>
+      <p class="username-menu"> <b>${user.displayName || 'Usuário Anônimo'} </b> </p>
     </li>
     <li>
       <p class="email-menu"> ${user.email || 'usuario@email.com'} </p>
@@ -90,6 +94,13 @@ export default () => {
     <img src="./assets/exit.png" alt="Ícone de Saída">
   </button>
 
+  <div id="modal-publish" class="modal-publish-container">
+    <div class="modal-publish">
+      <h3 class="font-work"> Por favor, digite uma review antes de publicar. </h3>
+
+      <button id="publish-confirmation" class="btn-modal btn-ok"> OK </button>
+    </div>
+  </div>
   `;
 
   // Sair da conta do usuário (MOBILE)
@@ -103,6 +114,33 @@ export default () => {
     e.preventDefault();
     signOut();
   });
+
+  // Manipulando os modais
+  function startModalDelete() {
+    const modalDelete = timeline.querySelector('#modal-delete')
+    if(modalDelete){
+      modalDelete.classList.add('show-modal')
+
+      modalDelete.addEventListener('click', (e) => {
+        if(e.target.id == 'modal-delete' || e.target.className == 'btn-modal btn-cancel') {
+          modalDelete.classList.remove('show-modal')
+        }
+      })
+    }
+  }
+
+  function startModalPublish() {
+    const modalPublish = timeline.querySelector('#modal-publish')
+    if (modalPublish) {
+      modalPublish.classList.add('show-modal')
+
+      modalPublish.addEventListener('click', (e) => {
+        if(e.target.id == 'modal-publish' || e.target.className == 'btn-modal btn-ok') {
+          modalPublish.classList.remove('show-modal')
+        }
+      })
+    }
+  }
 
   // Criando coleção no firebase chamada 'posts'
   const postsCollection = firebase.firestore().collection('posts');
@@ -129,7 +167,7 @@ export default () => {
         loadPosts();
       });
     } else {
-      alert('Por favor, digite uma review antes de publicar.');
+      startModalPublish();
     }
   });
 
@@ -141,17 +179,17 @@ export default () => {
           <div class="user-container">
             <img id="photo-profile" src="${(postUser.data().photo) !== '' ? postUser.data().photo : '../../assets/default-user-img.png'}" class="user-photo" accept=".jpg, .jpeg, .png">
             <div class="username-date-container">
-              <p class="username"> ${postUser.data().name || 'Usuário'} </p>
+              <p class="username"> ${postUser.data().name || 'Usuário Anônimo'} </p>
               <time class="date">${post.data().date}</time>
             </div>
           </div>
         
           <div id=${post.id}>
-            <textarea disabled class="post" rows="4" cols="50">${post.data().text}</textarea>
+            <textarea disabled class="post font-work" rows="7" cols="100">${post.data().text}</textarea>
             <div id=${post.id} class="edit-container display-none">
-              <textarea class="post edited-post display-none" rows="4" cols="50">${post.data().text}</textarea>
+              <textarea class="post font-work edited-post display-none" rows="4" cols="50">${post.data().text}</textarea>
 
-              <p class="empty-text"></p>
+              <p class="empty-text font-work"></p>
             
               <div id=${post.id} class="edit-buttons-container">
                 <button data-close class='close-edit-button buttons display-none' type='button'> Cancelar </button>
@@ -161,22 +199,33 @@ export default () => {
           </div>
 
           <div id=${post.id} class="buttons-container">
-            <button class="likePost-btn timeline-buttons"> 
+            <button class="likePost-btn timeline-buttons font-work"> 
               <img src="./assets/heart.png" alt="Ícone de Coração">
               ${post.data().likes}
             </button>  
 
             <div id=${post.id}>
-              <button class="editPost-btn timeline-buttons visibility-hidden">
+              <button class="editPost-btn timeline-buttons font-work visibility-hidden">
                 <img data-edit src="./assets/pencil.png" alt="Ícone de Lápis">
               </button>
-              <button class="deletePost-btn timeline-buttons visibility-hidden">
+              <button class="deletePost-btn timeline-buttons font-work visibility-hidden">
                 <img src="./assets/trash.png" alt="Ícone de Lixeira">
               </button>
             </div>
           </div>
         </div> 
       </li>
+
+      <div id="modal-delete" class="modal-delete-container">
+        <div class="modal-delete">
+          <h3 class="font-work"> Tem certeza quer deseja deletar esse post? </h3>
+
+          <div id=${post.id}>
+            <button id="delete-confirmation" class="btn-modal btn-yes"> Sim </button>
+            <button class="btn-modal btn-cancel"> Cancelar </button>
+          </div>
+        </div>
+      </div>
     `;
 
     const postBox = timeline.querySelector('#posts');
@@ -186,51 +235,78 @@ export default () => {
     const deleteButtons = postBox.querySelectorAll('.deletePost-btn');
     for (const button of deleteButtons) {
       button.addEventListener('click', (event) => {
-        const deleteConfirmation = confirm('Tem certeza quer deseja deletar esse post?');
-        if (deleteConfirmation) {
-          deletePost(event.currentTarget.parentNode.id);
-          loadPosts();
-        } else {
-          return false;
-        }
+        event.preventDefault()
+        startModalDelete()
       });
     }
 
+    const deleteConfirmation = timeline.querySelectorAll('#delete-confirmation');
+
+    for (const button of deleteConfirmation) {
+      button.addEventListener('click', (event) => {
+        event.preventDefault()
+        deletePost(event.currentTarget.parentNode.id);
+        loadPosts();
+      })
+    }
+   
+
     // Curtir e descurtir posts
-    function likePost(id) {
-      const promiseLikes = postsCollection
-        .doc(id)
-        .get()
-        .then((post) => {
-          const countLikes = post.data().likes;
-          if (countLikes >= 1) {
-            postsCollection
-              .doc(id)
-              .update({
-                likes: post.data().likes - 1,
-              })
-              .then(() => {
-                loadPosts();
-              });
-          } else {
-            postsCollection
-              .doc(id)
-              .update({
-                likes: post.data().likes + 1,
-              })
-              .then(() => {
-                loadPosts();
-              });
-          }
-        });
-      return promiseLikes.then();
+    const likesCounterFirebase = [];
+    const likesCounterPage = [];
+
+    function likePost(idPost, id, button) {
+      const verificador = likesCounterFirebase.includes(idPost);
+
+      const db = firebase.firestore();
+      const like = db.collection('posts').doc(idPost);
+      const currentLikes = button.textContent.trim();
+
+      if (verificador === false) {
+        likesCounterFirebase.push(idPost);
+        likesCounterPage.push(idPost);
+        console.log(likesCounterPage)
+
+        console.log(`vc deu like: ${likesCounterFirebase}`)
+        like.update({likes: firebase.firestore.FieldValue.increment(1)})
+        addLikesOnPage(id, button,currentLikes)
+      } else {
+        const id = likesCounterFirebase.indexOf(idPost);
+        likesCounterFirebase.splice(id,1);
+        const idPage = likesCounterPage.indexOf(idPost);
+        likesCounterPage.splice(idPage,1);
+
+        like.update({likes: firebase.firestore.FieldValue.increment(-1)})
+        console.log(`vc deu deslike: ${likesCounterFirebase}`)
+        unlikesOnPage(id, button, currentLikes)
+      }
+
+      function addLikesOnPage(id, button, currentLikes){
+        const quantidadeElementos = likesCounterPage.filter(x => x === id).length+1;
+        console.log(quantidadeElementos)
+
+        console.log(currentLikes)
+        const addLike = parseInt(currentLikes) + parseInt(quantidadeElementos)
+        const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
+        button.innerHTML = `${img} ${addLike}` 
+      }
+
+      function unlikesOnPage(id, button, currentLikes){
+        const quantidadeElementosTirar = likesCounterPage.filter(x => x === id).length-1;
+        console.log(quantidadeElementosTirar)
+
+        console.log(currentLikes)
+        const addUnlike = parseInt(currentLikes) + parseInt(quantidadeElementosTirar)
+        const img = `<img src="./assets/heart.png" alt="Ícone de Coração">`
+        button.innerHTML = `${img} ${addUnlike}` 
+      }
     }
 
     const likeButtons = postBox.querySelectorAll('.likePost-btn');
 
     for (const button of likeButtons) {
       button.addEventListener('click', (event) => {
-        likePost(event.currentTarget.parentNode.id);
+        likePost(event.currentTarget.parentNode.id, event.target.id, button);
       });
     }
 
@@ -303,12 +379,6 @@ export default () => {
         editVisilibity.classList.remove('visibility-hidden');
       }
     }
-
-    for (const likeVisilibity of likeButtons) {
-      if (firebase.auth().currentUser.email === postUser.data().email) {
-        likeVisilibity.classList.add('visibility-hidden'); 
-      }
-    } 
   }
 
   // Adicionando foto do perfil (MOBILE)
@@ -409,7 +479,7 @@ export default () => {
 
   // Mostrando os posts na tela
   function loadPosts() {
-    timeline.querySelector('#posts').innerHTML = '<span class="loading-post">Carregando posts...</span>';
+    timeline.querySelector('#posts').innerHTML = '<span class="font-work">Carregando posts...</span>';
 
     postsCollection.orderBy('date', 'desc').get().then((snap) => {
       timeline.querySelector('#posts').innerHTML = '';

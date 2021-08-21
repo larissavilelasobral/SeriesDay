@@ -19,13 +19,15 @@ export default () => {
                 <form class="form">
                     <input class="input" id="name" type="name" autocomplete="on" placeholder="🗒  Nome Completo" required>
                     <input class="input" id="email" type="email autocomplete="on" placeholder="✉  E-mail" required>
+                    <p id="email-error" class="error-message font-work"></p>
+
                     <input class="input" id="password" type="password" autocomplete="on" placeholder="⚙  Senha" required>
 
-                    <p class="password-rules" id="password-length"></p>
+                    <p class="error-message font-work" id="password-length"></p>
 
                     <input class="input" id="password-confirm" type="password" autocomplete="on" placeholder="⚙  Confirmar Senha" required>
 
-                    <p class="password-rules" id="password-error"></p>
+                    <p class="error-message font-work" id="password-error"></p>
                 </form>
                 <button id="signup-button-register" class="buttons register-button">Cadastrar-se</button>
                 <button id="gobackButton" class="goback-button">
@@ -40,6 +42,7 @@ export default () => {
   const profileName = register.querySelector('#name');
   const email = register.querySelector('#email');
   const password = register.querySelector('#password');
+  const emailError = register.querySelector('#email-error');
 
   const signUpButtonRegister = register.querySelector('#signup-button-register');
   const gobackButton = register.querySelector('#gobackButton');
@@ -56,13 +59,26 @@ export default () => {
         saveUserUpdate(profileName.value);
         saveUser(userUpdate.user, email.value, profileName.value);
       })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode === 'auth/email-already-in-use') {
+          console.log(errorCode)
+          emailError.style.color = 'red';
+          emailError.innerHTML = 'E-mail já cadastrado'
+        }
+        else if (errorCode === 'auth/invalid-email') {
+          console.log(errorCode)
+          emailError.style.color = 'red';
+          emailError.innerHTML = 'Insira um e-mail válido'
+        }
+      })
   });
 
   // VERFIFICAÇÃO DE SENHA (TAMANHO E CONFIRMAÇÃO)
   const verifyPasswordLength = () => {
     if (password.value.length < 6) {
       passwordLength.style.color = 'red';
-      passwordLength.innerHTML = 'Senha com mínimo de 6 dígitos.';
+      passwordLength.innerHTML = 'Senha com mínimo de 6 dígitos';
     } else {
       passwordLength.style.color = 'darkgreen';
       passwordLength.innerHTML = 'Senha válida!';
@@ -72,7 +88,7 @@ export default () => {
   const verifyConfirmPassword = () => {
     if (password.value !== passwordConfirm.value) {
       passwordError.style.color = 'red';
-      passwordError.innerHTML = 'Senhas não correspondentes.';
+      passwordError.innerHTML = 'Senhas não correspondentes';
       return false;
     } else {
       passwordError.style.color = 'darkgreen';
