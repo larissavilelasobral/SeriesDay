@@ -9,12 +9,11 @@
 2. [Histórias de Usuários](#pencil2-histórias-de-usuários)
 3. [Protótipos](#art-protótipos)
 4. [Como usar?](#gear-como-usar)
-5. [Links para saber mais sobre Pokémons](#link-links-para-saber-mais-sobre-pokémons)
-6. [Testes de Usabilidade](#busts_in_silhouette-testes-de-usabilidade)
-7. [Tecnologias utilizadas](#robot-tecnologias-utilizadas)
-8. [Estrutura dos Principais Arquivos](#file_folder-estrutura-dos-principais-arquivos)
-9. [Resultados](#%EF%B8%8F-resultados)
-10. [Sobre as desenvolvedoras](#woman_technologist-sobre-as-desenvolvedoras)
+5. [Testes de Usabilidade](#busts_in_silhouette-testes-de-usabilidade)
+6. [Tecnologias utilizadas](#robot-tecnologias-utilizadas)
+7. [Estrutura dos Principais Arquivos](#file_folder-estrutura-dos-principais-arquivos)
+8. [Resultados](#%EF%B8%8F-resultados)
+9. [Sobre as desenvolvedoras](#woman_technologist-sobre-as-desenvolvedoras)
 
 ---
 ## :dart: Definição do Produto
@@ -43,24 +42,19 @@ O seu design é mobile first também responsivo para tablet e desktop, o que pro
 
 ---
 ## :gear: Como usar?
-- Primeiramente o usuário acessará a página inicial, na qual, o acesso para a Pokedéx ocorre ao clicar na Pokébola;
 
-### Na Pokedéx:
-- O usuário é capaz de buscar um Pokémon pelo seu respectivo nome no campo "Busque por um Pokémon"; 
-- É possível ordenar os cards em ordem crescente ou decrescente para os atributos de **Nome**, **Raridade**, **Distância dos Ovos**, **Probabilidade de Aparição**, **Chance de Captura**, **Chance de Fuga**,  **Tamanho e Estatísticas**; 
-- A filtragem dos cards é independente da ordenação e os Pokemons podem ser selecionados de acordo com o seus **tipos**, **fraquezas**, **resistências** e **distância do candy**. É importante ressaltar que esses filtros são independentes entre si.
-- No campo de "Busca Avançada", é possível fazer a filtragem de forma integrada e dinâmica das gerações, tipos, resistências e fraquezas.
-- Ao passar o mouse em cima dos cards, os mesmos irão girar e informações adicionais serão exibidas. Quando isso ocorre, o usuário pode visualizar o **peso** e **altura** dos Pokémons, bem como as suas estatísticas **ataque-base**, **defesa-base**, **stamina-base**, **pontos de vida** e **força de combate**. Dados relativos as fraquezas, resistências e geração do indivíduo também poderão ser visualizadas e, além disso, são exibidas setas verdes ou vermelhas que informam, respectivamente, se tal informação do Pokémon está acima ou abaixo da média geral;
-- À esquerda da tela, existe um botão de "Informações" para acessar detalhes dos termos exibidos na página. 
+- A tela inicial da aplicação traz **Página de Login** que apresenta ao usário as opções de fazer o login com email e senha já cadastrados, entrar na rede social por meio do login com Conta Google ou prosseguir para a Página de Cadastro;
+- Na **Página de Cadastro**, o cliente pode cadastrar-se inserindo seus dados de Nome, E-mail e Senha;
+- Ao realizar qualquer uma dessas três formas de acesso à rede social, o cliente será encaminhado para a **Página de Timeline**, onde ocorre toda a interação entre os usuários, como publicar, curtir, editar e deletar postagens. Nela, ainda existe uma área de perfil, onde são exibidos o nome, o email e a foto (alterável) do usuário;
 
 ---
 ## :busts_in_silhouette: Testes de Usabilidade
 Durante o desenvolvimento do produto, foram realizados testes de usabilidade com diferentes indivíduos no intuito de analisar a experiência do usuário com a interface do site. Com base nos resultados desses testes, foram detectados os seguintes pontos de ajustes:
 
-- Usuário gostaria de entender mais sobre os termos utilizados para descrever os Pokémons
-- Desejo por filtros múltiplos que integrem informações 
+- ?
+- ?
 
-Para a resolução dessas questões, foram implementados os campos de "Informações" e de "Busca Avançada" descritos anteriormente.
+Para a resolução dessas questões, foram feitas as seguintes modificações ...?.
 
 ---
 ## :robot: Tecnologias utilizadas
