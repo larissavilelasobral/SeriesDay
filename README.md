@@ -35,7 +35,7 @@ O seu design é mobile first também responsivo para tablet e desktop, o que pro
 ---
 ## :art: Protótipos 
 
-* ####  Mobile 
+* ####  Mobile
 ![img](./src/assets/prototipo-mobile.png)
 
 * #### Desktop
@@ -52,11 +52,6 @@ O seu design é mobile first também responsivo para tablet e desktop, o que pro
 - No campo de "Busca Avançada", é possível fazer a filtragem de forma integrada e dinâmica das gerações, tipos, resistências e fraquezas.
 - Ao passar o mouse em cima dos cards, os mesmos irão girar e informações adicionais serão exibidas. Quando isso ocorre, o usuário pode visualizar o **peso** e **altura** dos Pokémons, bem como as suas estatísticas **ataque-base**, **defesa-base**, **stamina-base**, **pontos de vida** e **força de combate**. Dados relativos as fraquezas, resistências e geração do indivíduo também poderão ser visualizadas e, além disso, são exibidas setas verdes ou vermelhas que informam, respectivamente, se tal informação do Pokémon está acima ou abaixo da média geral;
 - À esquerda da tela, existe um botão de "Informações" para acessar detalhes dos termos exibidos na página. 
-
----
-## :link: Links para saber mais sobre Pokémons
-- [PokemonGo](https://pokemongolive.com/pt_br/)
-- [PokeDéx Completa (todas as gerações)](https://www.pokemon.com/br/pokedex/)
 
 ---
 ## :busts_in_silhouette: Testes de Usabilidade
@@ -78,28 +73,48 @@ Para a resolução dessas questões, foram implementados os campos de "Informaç
 | `Jest` | Framework de teste em JavaScript|
 | `Node.js` | Software de execução de códigos JavaScript|
 | `Git e GitHub` | Sistemas de controle de versões distribuídos|
+| `Firebase` | Plataforma desenvolvida pelo Google para a criação de aplicativos móveis e da web|
 
 ---
 
 ## :file_folder: Estrutura dos Principais Arquivos
 ```
 .
-├── 📁 src
-|   ├── 📁 data 
-|   |   └── 📁 pokemon
-|   |       ├── 📄 pokemon.js
-|   |       ├── 📄 pokemon.json
-|   |       └── 📄 README.md   
-|   ├── 📁 images
-|   ├── 📄 data.js
-|   ├── 📄 index.html
-|   ├── 📄 main.js
-|   ├── 📄 pokedex.html
-|   └── 📄 style.css
-├── 📁 test
-|   └── 📄 data.spec.js
-├── 📄 README.md
-├── 📄 package.json
+├── 📁src
+|   ├── 📁assets
+|   ├── 📁pages
+|   |   ├── 📁Login
+|   |   |   ├── 📁_snapshots_
+|   |   |   |   └── 📄index.spec.js.snap
+|   |   |   ├── 📄index.js
+|   |   |   ├── 📄index.spec.js
+|   |   |   ├── 📄mock.js
+|   |   |   └── 📄style.js
+|   |   |
+|   |   ├── 📁Register
+|   |   |   ├── 📁_snapshots_
+|   |   |   |   └── 📄index.spec.js.snap
+|   |   |   ├── 📄index.js
+|   |   |   ├── 📄index.spec.js
+|   |   |   ├── 📄mock.js
+|   |   |   └── 📄style.js
+|   |   |
+|   |   ├── 📁Timeline
+|   |   |   ├── 📁_snapshots_
+|   |   |   |   └── 📄index.spec.js.snap
+|   |   |   ├── 📄index.js
+|   |   |   ├── 📄index.spec.js
+|   |   |   ├── 📄mock.js
+|   |   |   └── 📄style.js
+|   ├── 📁services
+|   |   ├── 📄index.js
+|   |   └── 📄index.spec.js
+|   ├── 📄config.js
+|   ├── 📄general.css 
+|   ├── 📄index.html
+|   └── 📄main.js
+├── 📄README.md
+└── 📄package.json
 
 ```
 
@@ -138,7 +153,7 @@ Para a resolução dessas questões, foram implementados os campos de "Informaç
 - [LinkedIn](https://www.linkedin.com/in/patriciabarnabe)
 - E-mail: patbarnabe5@gmail.com
 
-### Laís Mune
+### Larissa Vilela
 
-- [LinkedIn](https://www.linkedin.com/in/laís-ayume-lima-mune)
-- E-mail: aymune@hotmail.com
+- [LinkedIn](https://www.linkedin.com/in/larissa-vilela-sobral/)
+- E-mail: larissavilelasobral@gmail.com
