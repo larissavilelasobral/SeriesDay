@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register should load the page 1`] = `
+<div>
+  
+  
+  <link
+    href="./pages/Register/style.css"
+    rel="stylesheet"
+  />
+  
+
+  
+  <main
+    class="box"
+  >
+    
+      
+    <div
+      class="container"
+    >
+      
+        
+      <div
+        class="banner"
+      >
+        
+            
+        <img
+          alt="Logo"
+          src="assets/logo.png"
+        />
+        
+            
+        <div
+          class="title-container"
+        >
+          
+                
+          <h1
+            class="title"
+          >
+            SeriesDay
+          </h1>
+          
+                
+          <h3
+            class="subtitle"
+          >
+            review de séries
+          </h3>
+          
+            
+        </div>
+        
+        
+      </div>
+      
+          
+        
+      <section>
+        
+            
+        <form
+          class="form"
+        >
+          
+                
+          <input
+            autocomplete="on"
+            class="input"
+            id="name"
+            placeholder="🗒  Nome Completo"
+            required=""
+            type="name"
+          />
+          
+                
+          <input
+            class="input"
+            id="email"
+            on"=""
+            placeholder="✉  E-mail"
+            required=""
+            type="email autocomplete="
+          />
+          
+                
+          <p
+            class="error-message font-work"
+            id="email-error"
+          />
+          
+
+                
+          <input
+            autocomplete="on"
+            class="input"
+            id="password"
+            placeholder="⚙  Senha"
+            required=""
+            type="password"
+          />
+          
+
+                
+          <p
+            class="error-message font-work"
+            id="password-length"
+          />
+          
+
+                
+          <input
+            autocomplete="on"
+            class="input"
+            id="password-confirm"
+            placeholder="⚙  Confirmar Senha"
+            required=""
+            type="password"
+          />
+          
+
+                
+          <p
+            class="error-message font-work"
+            id="password-error"
+          />
+          
+            
+        </form>
+        
+            
+        <button
+          class="buttons register-button"
+          id="signup-button-register"
+        >
+          Cadastrar-se
+        </button>
+        
+            
+        <button
+          class="goback-button"
+          id="gobackButton"
+        >
+          
+                
+          <img
+            alt="Ícone de Seta"
+            src="./assets/arrow.png"
+          />
+           
+            
+        </button>
+        
+        
+      </section>
+      
+      
+    </div>
+    
+  
+  </main>
+  
+  
+    
+</div>
+`;

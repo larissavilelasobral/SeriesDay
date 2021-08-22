@@ -1,6 +1,6 @@
 import { saveUserUpdate, saveUser, registerUser } from '../../services/index.js';
 
-export default () => {
+export default function Register() {
   const register = document.createElement('div');
   register.innerHTML = `
       <link rel="stylesheet" href="./pages/Register/style.css" />
@@ -103,4 +103,4 @@ export default () => {
   });
 
   return register;
-};
+}

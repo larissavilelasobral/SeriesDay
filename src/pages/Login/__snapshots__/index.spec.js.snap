@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should load the page 1`] = `
+<div>
+  
+    
+  <input
+    autocomplete="on"
+    class="input"
+    id="email"
+    placeholder="E-mail"
+    required=""
+    type="email"
+  />
+  
+    
+  <input
+    autocomplete="on"
+    class="input"
+    id="password"
+    placeholder="Senha"
+    required=""
+    type="password"
+  />
+  
+    
+  <button
+    class="signin-button buttons"
+    id="signin-button"
+  >
+    Entrar
+  </button>
+  
+
+    
+  <button
+    class="google-button buttons"
+    id="google-button"
+  >
+    
+        
+    <img
+      alt="Ícone do Google"
+      class="google-icon-btn"
+      src="../../assets/google-icon.svg"
+    />
+    
+            Entrar com Conta Google
+    
+  </button>
+  
+    
+</div>
+`;

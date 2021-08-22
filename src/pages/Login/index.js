@@ -104,8 +104,7 @@ export default function Login() {
 
   googleButton.addEventListener('click', (e) => {
     e.preventDefault();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    googleLogin(provider);
+    googleLogin();
   });
   return login;
 }

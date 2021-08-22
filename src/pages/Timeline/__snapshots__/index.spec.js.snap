@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline should load the page 1`] = `
+<div>
+  
+    
+  <button
+    class="signout-button buttons"
+    id="signout-button"
+  >
+    
+      
+    <img
+      alt="Ícone de Saída"
+      src="./assets/exit-black.png"
+    />
+    
+    
+  </button>
+  
+
+    
+  <button
+    class="signout-button desktop-signout-button buttons"
+    id="desktop-signout-button"
+  >
+    
+      
+    <img
+      alt="Ícone de Saída"
+      src="./assets/exit-white.png"
+    />
+    
+    
+  </button>
+  
+
+    
+  <div
+    id="deleteBtn"
+  >
+    
+      
+    <button
+      class="deletePost-btn timeline-buttons font-work visibility-hidden"
+    >
+      
+        
+      <img
+        alt="Ícone de Lixeira"
+        src="./assets/trash.png"
+      />
+      
+      
+    </button>
+    
+    
+  </div>
+  
+  
+</div>
+`;
