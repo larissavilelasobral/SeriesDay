@@ -35,3 +35,9 @@ describe('deletePost', () => {
     expect(typeof services.deletePost).toBe('function');
   });
 });
+
+describe('editPost', () => {
+  it('should be a function', () => {
+    expect(typeof services.editPost).toBe('function');
+  });
+});

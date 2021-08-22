@@ -9,6 +9,15 @@ import {
   editPost,
 } from './index.js';
 
+// registerUser = jest.fn(() => Promise.resolve(true));
+// saveUser = jest.fn(() => Promise.resolve(true));
+// saveUserUpdate = jest.fn(() => Promise.resolve(true));
+// signIn = jest.fn(() => Promise.resolve(true));
+// deletePost = jest.fn(() => Promise.resolve(true));
+// editPost = jest.fn(() => Promise.resolve(true));
+// googleLogin = jest.fn(() => Promise.resolve(true));
+// signOut = jest.fn(() => Promise.resolve(true));
+
 describe('googleLogin', () => {
   it('should be a function', () => {
     expect(typeof googleLogin).toBe('function');
@@ -48,7 +57,7 @@ describe('registerUser', () => {
   });
 
   it('should call firebase', () => {
-    registerUser();
+    registerUser('email', 'password');
     expect(firebase.auth).toBeCalled();
   });
 });
@@ -79,10 +88,20 @@ describe('deletePost', () => {
   it('should be a function', () => {
     expect(typeof deletePost).toBe('function');
   });
+
+  it('should call firebase', () => {
+    deletePost('id', 'postsCollection');
+    expect(firebase.auth).toBeCalled();
+  });
 });
 
 describe('editPost', () => {
   it('should be a function', () => {
     expect(typeof editPost).toBe('function');
+  });
+
+  it('should call firebase', () => {
+    editPost('newPost', 'id', 'postsCollection');
+    expect(firebase.auth).toBeCalled();
   });
 });
