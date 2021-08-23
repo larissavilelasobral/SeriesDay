@@ -43,7 +43,7 @@ body {
 }
 
 .title {
-    font-family: "Aquatico";
+    font-family: Aquatico, sans-serif;
     font-size: 25pt;
 }
 
@@ -55,14 +55,13 @@ body {
 .input {
     width: 250px;
     height: 40px;
-    margin-top: 5px;
     border: none;
     font-family: "Work Sans", sans-serif;
     font-size: 12pt;
     padding: 2%;
     border-radius: 5px;
     background-color: #f3f3f3;
-    margin:2% 0;
+    margin-top:2%;
     cursor: pointer;
 }
 
@@ -114,7 +113,6 @@ body {
   background-color: rgba(0, 0, 255, 0);
   border: none;
   cursor: pointer;
-  font-size: larger;
   margin-top: -1%;
   color: #f3f3f3;
   width: 103%;
@@ -183,6 +181,21 @@ span:hover {
     display: flex;
 }
 
+/*RESPONSIVIDADE TABLET*/
+@media screen and (min-width: 767px) {
+    .box {
+        width: 50%;
+        left: 25%;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .box {
+        width: 40%;
+        left: 31%;
+    }
+}
+
 /*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
 
@@ -227,7 +240,7 @@ span:hover {
     }
     
     .title {
-        font-family: "Aquatico";
+        font-family: Aquatico, sans-serif;
         font-size: 3em;
     }
     

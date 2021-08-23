@@ -42,7 +42,6 @@ body {
   font-family: 'Averia Sans Libre', cursive;
   font-size: 12pt;
   font-weight: bolder;
-  transition: 0.5s ease-in-out;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .3);
 }
 

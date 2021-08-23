@@ -1,6 +1,6 @@
 import { saveUserUpdate, saveUser, registerUser } from '../../services/index.js';
 
-export default () => {
+export default function Register() {
   const register = document.createElement('div');
   register.innerHTML = `
       <link rel="stylesheet" href="./pages/Register/style.css" />
@@ -62,16 +62,13 @@ export default () => {
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode === 'auth/email-already-in-use') {
-          console.log(errorCode)
           emailError.style.color = 'red';
-          emailError.innerHTML = 'E-mail já cadastrado'
-        }
-        else if (errorCode === 'auth/invalid-email') {
-          console.log(errorCode)
+          emailError.innerHTML = 'E-mail já cadastrado';
+        } else if (errorCode === 'auth/invalid-email') {
           emailError.style.color = 'red';
-          emailError.innerHTML = 'Insira um e-mail válido'
+          emailError.innerHTML = 'Insira um e-mail válido';
         }
-      })
+      });
   });
 
   // VERFIFICAÇÃO DE SENHA (TAMANHO E CONFIRMAÇÃO)
@@ -90,16 +87,14 @@ export default () => {
       passwordError.style.color = 'red';
       passwordError.innerHTML = 'Senhas não correspondentes';
       return false;
-    } else {
-      passwordError.style.color = 'darkgreen';
-      passwordError.innerHTML = 'Senhas confirmadas!';
-      return true;
     }
+    passwordError.style.color = 'darkgreen';
+    passwordError.innerHTML = 'Senhas confirmadas!';
+    return true;
   };
 
   passwordConfirm.addEventListener('input', verifyConfirmPassword);
   password.addEventListener('input', verifyPasswordLength);
-
 
   // BOTÃO DE VOLTAR PARA PÁGINA DE LOGIN
   gobackButton.addEventListener('click', (e) => {
@@ -108,4 +103,4 @@ export default () => {
   });
 
   return register;
-};
+}
