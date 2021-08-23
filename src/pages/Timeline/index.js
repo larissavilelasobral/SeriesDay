@@ -31,7 +31,7 @@ export default function Timeline() {
     <ul class="inside-menu">
       <div class="profile-container">
         <li class="upload-photo">
-          <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
+          <img id="preview" src="${user.photoURL || 'https://firebasestorage.googleapis.com/v0/b/socialnetworklab-48687.appspot.com/o/default-user-img.png?alt=media&token=1a8edc7a-d922-431f-8d10-e91883a3b04d'}" class="user-photo-menu" accept=".jpg, .jpeg, .png">
 
           <p class="photo-message font-work" id="photo-message-mobile"></p>
 
@@ -70,7 +70,7 @@ export default function Timeline() {
     
   <div class="desktop-profile-container">
     <li class="upload-photo">
-      <img id="preview" src="${user.photoURL || '../../assets/default-user-img.png'}" class="user-photo-menu desktop-preview">
+      <img id="preview" src="${user.photoURL || 'https://firebasestorage.googleapis.com/v0/b/socialnetworklab-48687.appspot.com/o/default-user-img.png?alt=media&token=1a8edc7a-d922-431f-8d10-e91883a3b04d'}" class="user-photo-menu desktop-preview">
 
       <p class="photo-message font-work" id="photo-message-desktop"></p>
 

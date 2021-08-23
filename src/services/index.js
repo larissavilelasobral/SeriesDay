@@ -9,6 +9,8 @@ export const googleLogin = () => {
           name: user.displayName,
           id: user.uid,
           photo: user.photoURL,
+          email: user.email,
+          userId: user.uid,
         }, { merge: true });
     })
     .catch((error) => {
@@ -39,7 +41,7 @@ export const saveUser = (user, userEmail, userName) => {
     id: user.uid,
     name: userName,
     email: userEmail,
-    photo: '',
+    photo: 'https://firebasestorage.googleapis.com/v0/b/socialnetworklab-48687.appspot.com/o/default-user-img.png?alt=media&token=1a8edc7a-d922-431f-8d10-e91883a3b04d',
   })
     .then(() => true)
     .catch((error) => error);
