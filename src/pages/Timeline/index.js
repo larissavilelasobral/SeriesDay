@@ -2,7 +2,7 @@ import { signOut, deletePost, editPost } from '../../services/index.js';
 
 export default function Timeline() {
   const user = firebase.auth().currentUser;
-  // Criando coleção no firebase chamada 'posts'
+
   const postsCollection = firebase.firestore().collection('posts');
 
   if (!user) {
@@ -107,13 +107,11 @@ export default function Timeline() {
   </div>
   `;
 
-  // Sair da conta do usuário (MOBILE)
   timeline.querySelector('#signout-button').addEventListener('click', (e) => {
     e.preventDefault();
     signOut();
   });
 
-  // Sair da conta do usuário (DESKTOP)
   timeline
     .querySelector('.desktop-signout-button')
     .addEventListener('click', (e) => {
@@ -121,7 +119,6 @@ export default function Timeline() {
       signOut();
     });
 
-  // Manipulando os modais
   function startModalDelete() {
     const modalDelete = timeline.querySelector('#modal-delete');
     if (modalDelete) {
@@ -154,7 +151,6 @@ export default function Timeline() {
     }
   }
 
-  // Adicionando posts
   function createTemplatePost(post, postUser) {
     const postTemplate = `
       <li data-templatepost class="posts-box">
@@ -214,7 +210,6 @@ export default function Timeline() {
     const postBox = timeline.querySelector('#posts');
     postBox.innerHTML += postTemplate;
 
-    // Deletar posts
     const deleteButtons = postBox.querySelectorAll('.deletePost-btn');
     // eslint-disable-next-line no-restricted-syntax
     for (const button of deleteButtons) {
@@ -236,7 +231,6 @@ export default function Timeline() {
       });
     }
 
-    // Curtir e descurtir posts
     const likesCounterFirebase = [];
     const likesCounterPage = [];
 
@@ -294,7 +288,6 @@ export default function Timeline() {
       });
     }
 
-    // Abrir área de editar post
     const postLi = timeline.querySelectorAll('[data-templatePost]');
 
     function openEditPost(element) {
@@ -318,7 +311,6 @@ export default function Timeline() {
       });
     }
 
-    // Fechar área de editar post
     function closeEditPost(element) {
       element.querySelector('.edited-post').classList.add('display-none');
       element.querySelector('.save-edit-button').classList.add('display-none');
@@ -358,7 +350,6 @@ export default function Timeline() {
       });
     }
 
-    // Visibilidade dos botões de editar, deletar e curtir
     // eslint-disable-next-line no-restricted-syntax
     for (const deleteVisilibity of deleteButtons) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
@@ -368,10 +359,6 @@ export default function Timeline() {
 
     const editPencil = timeline.querySelectorAll('.editPost-btn');
 
-    // console.log(firebase.auth().currentUser.email === postUser.data().email)
-    // console.log(firebase.auth().currentUser.email);
-    // console.log(postUser.data().email);
-
     // eslint-disable-next-line no-restricted-syntax
     for (const editVisilibity of editPencil) {
       if (firebase.auth().currentUser.email === postUser.data().email) {
@@ -380,7 +367,6 @@ export default function Timeline() {
     }
   }
 
-  // Mostrando os posts na tela
   function loadPosts() {
     timeline.querySelector('#posts').innerHTML = '<span class="font-work">Carregando posts...</span>';
 
@@ -403,7 +389,6 @@ export default function Timeline() {
 
   loadPosts();
 
-  // Enviando posts para o firestore
   timeline.querySelector('#postForm').addEventListener('submit', (event) => {
     event.preventDefault();
     const text = timeline.querySelector('#postText').value;
@@ -429,7 +414,6 @@ export default function Timeline() {
     }
   });
 
-  // Adicionando foto do perfil (MOBILE)
   const photoMsgMobile = timeline.querySelector('#photo-message-mobile');
   const uploadImage = timeline.querySelector('#uploadImage');
 
@@ -482,7 +466,6 @@ export default function Timeline() {
       });
   });
 
-  // Adicionando foto do perfil (DESKTOP)
   const photoMsgDesktop = timeline.querySelector('#photo-message-desktop');
   const uploadImageDestkop = timeline.querySelector('.desktop-upload-image');
 

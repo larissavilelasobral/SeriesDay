@@ -18,13 +18,11 @@ export const Timeline = () => {
     </div>
   `;
 
-  // Sair da conta do usuário (MOBILE)
   timeline.querySelector('#signout-button').addEventListener('click', (e) => {
     e.preventDefault();
     signOut();
   });
 
-  // Sair da conta do usuário (DESKTOP)
   timeline.querySelector('.desktop-signout-button').addEventListener('click', (e) => {
     e.preventDefault();
     signOut();

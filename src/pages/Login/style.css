@@ -181,7 +181,6 @@ span:hover {
     display: flex;
 }
 
-/*RESPONSIVIDADE TABLET*/
 @media screen and (min-width: 767px) {
     .box {
         width: 50%;
@@ -196,7 +195,6 @@ span:hover {
     }
 }
 
-/*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
 
     body {

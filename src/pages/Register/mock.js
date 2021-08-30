@@ -46,7 +46,6 @@ export const Register = () => {
 
   const signUpButtonRegister = register.querySelector('#signup-button-register');
 
-  // INPUTS PARA CADASTRO
   signUpButtonRegister.addEventListener('click', (e) => {
     e.preventDefault();
     registerUser(email.value, password.value)

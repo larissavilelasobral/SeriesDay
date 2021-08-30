@@ -13,19 +13,17 @@ export const Login = () => {
     </button>
     `;
 
-  // VARIAVEIS
   const email = login.querySelector('#email');
   const password = login.querySelector('#password');
   const loginError = login.querySelector('#loginError');
   const signInButton = login.querySelector('#signin-button');
 
-  // LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
   signInButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (email.value) {
       signIn(email.value, password.value)
         .then(() => {
-          window.location.hash = 'timeline'; // ir para o feed
+          window.location.hash = 'timeline'; 
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -40,7 +38,6 @@ export const Login = () => {
     }
   });
 
-  //  AUTENTICAÇÃO COM CONTA GOOGLE
   const googleButton = login.querySelector('#google-button');
 
   googleButton.addEventListener('click', (e) => {
