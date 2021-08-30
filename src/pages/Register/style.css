@@ -111,7 +111,6 @@ body {
     margin-left: -75%;
 }
 
-/*RESPONSIVIDADE TABLET*/
 @media screen and (min-width: 767px) {
     .box {
         width: 50%;
@@ -126,7 +125,6 @@ body {
     }
 }
 
-/*RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 1366px) {
 
     body {

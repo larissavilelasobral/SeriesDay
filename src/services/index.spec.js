@@ -9,15 +9,6 @@ import {
   editPost,
 } from './index.js';
 
-// registerUser = jest.fn(() => Promise.resolve(true));
-// saveUser = jest.fn(() => Promise.resolve(true));
-// saveUserUpdate = jest.fn(() => Promise.resolve(true));
-// signIn = jest.fn(() => Promise.resolve(true));
-// deletePost = jest.fn(() => Promise.resolve(true));
-// editPost = jest.fn(() => Promise.resolve(true));
-// googleLogin = jest.fn(() => Promise.resolve(true));
-// signOut = jest.fn(() => Promise.resolve(true));
-
 describe('googleLogin', () => {
   it('should be a function', () => {
     expect(typeof googleLogin).toBe('function');

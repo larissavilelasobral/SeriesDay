@@ -49,12 +49,13 @@ O seu design é mobile first também responsivo para tablet e desktop, o que pro
 
 ---
 ## :busts_in_silhouette: Testes de Usabilidade
-Durante o desenvolvimento do produto, foram realizados testes de usabilidade com diferentes indivíduos no intuito de analisar a experiência do usuário com a interface do site. Com base nos resultados desses testes, foram detectados os seguintes pontos de ajustes:
+Durante o desenvolvimento do produto, foi realizado teste de usabilidade com diferentes indivíduos no intuito de analisar a experiência do usuário com a interface do site. Com base nos resultados desse teste, foram detectados os seguintes pontos de ajustes:
 
-- ?
-- ?
+- Mais respostas visuais aos erros de login e cadastro no site
+- Foto de perfil distorcida devido ao tamanho da imagem
+- Cores que combinam melhor na Página de Timeline
 
-Para a resolução dessas questões, foram feitas as seguintes modificações ...?.
+Para a resolução dessas questões, foram implemantadas mais respostas visuais, assim como modais para comunicar ao usuário sobre determinadas interações com o site. Além disso, no momento na alteração da foto de perfil, foi adicionada a informação sobre o tamanho ideal da foto para que a imagem encaixe-se perfeitamente. Já no design, foram feitas mudanças nas cores da Página de Timeline, de acordo com o sugerido no teste de usabilidade.
 
 ---
 ## :robot: Tecnologias utilizadas
@@ -115,30 +116,21 @@ Para a resolução dessas questões, foram feitas as seguintes modificações ..
 ## ✔️ Resultados
 
 * ####  Mobile (375px)
-![img](./src/images/resultado-mobile-index.png)
-![img](./src/images/resultado-mobile-pokedex1.png)
-![img](./src/images/resultado-mobile-pokedex2.png)
-![img](./src/images/resultado-mobile-pokedex3.png)
-![img](./src/images/resultado-mobile-pokedex4.png)
-![img](./src/images/resultado-mobile-pokedex5.png)
+![img](./src/assets/mobile-login.png)
+![img](./src/assets/mobile-register.png)
+![img](./src/assets/mobile-timeline.png)
+![img](./src/assets/mobile-timeline-perfil.png)
 
 * #### Tablet (768px)
-![img](./src/images/resultado-tablet-index.png)
-![img](./src/images/resultado-tablet-pokedex1.png)
-![img](./src/images/resultado-tablet-pokedex2.png)
-![img](./src/images/resultado-tablet-pokedex3.png)
-![img](./src/images/resultado-tablet-pokedex4.png)
-![img](./src/images/resultado-tablet-pokedex5.png)
+![img](./src/assets/tablet-login.png)
+![img](./src/assets/tablet-register.png)
+![img](./src/assets/tablet-timeline.png)
+![img](./src/assets/tablet-timeline-perfil.png)
 
 * #### Desktop (1440px)
-![img](./src/images/resultado-desktop-index.png)
-![img](./src/images/resultado-desktop-pokedex1.png)
-![img](./src/images/resultado-desktop-pokedex2.png)
-![img](./src/images/resultado-desktop-pokedex3.png)
-![img](./src/images/resultado-desktop-pokedex4.png)
-![img](./src/imagesresultado-desktop-pokedex5.png)
-![img](./src/images/resultado-desktop-pokedex6.png)
-
+![img](./src/assets/desktop-login.png)
+![img](./src/assets/desktop-register.png)
+![img](./src/assets/desktop-timeline.png)
 
 ---
 ## :woman_technologist: Sobre as desenvolvedoras

@@ -51,7 +51,6 @@ export default function Register() {
   const passwordConfirm = register.querySelector('#password-confirm');
   const passwordError = register.querySelector('#password-error');
 
-  // INPUTS PARA CADASTRO
   signUpButtonRegister.addEventListener('click', (e) => {
     e.preventDefault();
     registerUser(email.value, password.value)
@@ -71,7 +70,6 @@ export default function Register() {
       });
   });
 
-  // VERFIFICAÇÃO DE SENHA (TAMANHO E CONFIRMAÇÃO)
   const verifyPasswordLength = () => {
     if (password.value.length < 6) {
       passwordLength.style.color = 'red';
@@ -96,7 +94,6 @@ export default function Register() {
   passwordConfirm.addEventListener('input', verifyConfirmPassword);
   password.addEventListener('input', verifyPasswordLength);
 
-  // BOTÃO DE VOLTAR PARA PÁGINA DE LOGIN
   gobackButton.addEventListener('click', (e) => {
     e.preventDefault();
     window.location.hash = '';

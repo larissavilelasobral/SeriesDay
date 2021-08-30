@@ -49,14 +49,12 @@ export default function Login() {
     
     `;
 
-  // VARIAVEIS
   const email = login.querySelector('#email');
   const password = login.querySelector('#password');
   const loginError = login.querySelector('#loginError');
   const signInButton = login.querySelector('#signin-button');
   const signUpButton = login.querySelector('#signup-button');
 
-  // Modal para campo de e-mail vazio
   function startModalEmptyEmail() {
     const modalEmail = login.querySelector('#modal-email');
     if (modalEmail) {
@@ -70,7 +68,6 @@ export default function Login() {
     }
   }
 
-  // LOGIN DE USUARIOS EXISTENTES POR EMAIL E SENHA
   signInButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (email.value) {
@@ -93,13 +90,11 @@ export default function Login() {
     }
   });
 
-  // BOTÃO PARA MUDAR PARA A PAGINA DE CADASTRO APÓS O CARREGAMENTO DA PAGINA
   signUpButton.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.hash = 'register'; // ir para pagina cadastro
+    window.location.hash = 'register'; 
   });
 
-  //  AUTENTICAÇÃO COM CONTA GOOGLE
   const googleButton = login.querySelector('#google-button');
 
   googleButton.addEventListener('click', (e) => {
