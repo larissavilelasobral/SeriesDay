@@ -55,7 +55,7 @@ Durante o desenvolvimento do produto, foi realizado teste de usabilidade com dif
 - Foto de perfil distorcida devido ao tamanho da imagem
 - Cores que combinam melhor na Página de Timeline
 
-Para a resolução dessas questões, foram implemantadas mais respostas visuais, assim como modais para comunicar ao usuário sobre determinadas interações com o site. Além disso, no momento na alteração da foto de perfil, foi adicionada a informação sobre o tamanho ideal da foto para que a imagem encaixe-se perfeitamente. Já no design, foram feitas mudanças nas cores da Página de Timeline, de acordo com o sugerido no teste de usabilidade.
+Para a resolução dessas questões, foram implementadas mais respostas visuais, assim como modais para comunicar ao usuário sobre determinadas interações com o site. Além disso, no momento na alteração da foto de perfil, foi adicionada a informação sobre o tamanho ideal da foto para que a imagem encaixe-se perfeitamente. Já no design, foram feitas mudanças nas cores da Página de Timeline, de acordo com o sugerido no teste de usabilidade.
 
 ---
 ## :robot: Tecnologias utilizadas
