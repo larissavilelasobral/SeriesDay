@@ -1,5 +1,4 @@
-
-# SeriesDay :movie_camera:
+<h1 align="center">SeriesDay :movie_camera:</p>
 
 ## Projeto 3 - Social Network desenvolvido no bootcamp de Front-End da SAP006 Laboratória :yellow_heart:
 
