@@ -26,7 +26,7 @@ O seu design é mobile first também responsivo para tablet e desktop, o que pro
 Você pode acessar a aplicação utilizando o usuário de teste abaixo:
 <div align='center'>
  
-| #                     	|             SeriesDay         |         
+| #                     	|             Login            |         
 |:-----------------------:|:----------------------------:	|
 | 🆔	                    | laboratoria@teste.com 	     | 
 | :key:                 	|            123456            	|            
