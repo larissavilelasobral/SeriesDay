@@ -23,6 +23,17 @@ O layout do site baseia-se nos acessórios cinematográficos, o que remete à pr
 
 O seu design é mobile first também responsivo para tablet e desktop, o que proporciona a versatilidade e adaptabilidade desejada pelos usuários. A sua idealização foi feita a partir de protótipos de baixa e de alta fidelidade que nortearam a construção do site de acordo com as necessidades dos clientes. Nele, é possível criar uma conta de acesso, logar-se com ela, criar, editar, deletar e dar likes em publicações. Além disso, existe uma área editável de perfil, onde o cliente pode alterar sua imagem de exibição.
 
+Você pode acessar a aplicação utilizando o usuário de teste abaixo:
+<div align='center'>
+ 
+| #                     	|             SeriesDay         |         
+|:-----------------------:|:----------------------------:	|
+| 🆔	                    | laboratoria@teste.com 	     | 
+| :key:                 	|            123456            	|            
+
+</div>
+
+
 ---
 ## :pencil2: Histórias de Usuários
 ![img](./src/assets/historia1.png)
