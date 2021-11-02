@@ -37,7 +37,7 @@ Você pode acessar a aplicação utilizando o usuário de teste abaixo:
 ---
 ## :pencil2: Histórias de Usuários
 ![img](./src/assets/historia1.png)
-<img src="./src/assets/historia1.png" alt="drawing" width="500"/>
+<img src="./src/assets/historia1.png" alt="drawing" width="800"/>
 ![img](./src/assets/historia2.png)
 ![img](./src/assets/historia3.png)
 ![img](./src/assets/historia4.png)
