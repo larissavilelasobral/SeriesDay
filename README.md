@@ -45,10 +45,9 @@ Você pode acessar a aplicação utilizando o usuário de teste abaixo:
 ## :art: Protótipos 
 
 * ####  Mobile
-![img](./src/assets/prototipo-mobile.png)
 <img src="./src/assets/prototipo-mobile.png" alt="prototipo-mobile" width="800"/>
 * #### Desktop
-![img](./src/assets/prototipo-desktop.png)
+<img src="./src/assets/prototipo-desktop.png" alt="prototipo-desktop" width="800"/>
 
 ---
 ## :gear: Como usar?
@@ -144,12 +143,13 @@ Para a resolução dessas questões, foram implementadas mais respostas visuais,
 
 ---
 ## :woman_technologist: Sobre as desenvolvedoras
-### Patrícia Barnabé
-
-- [LinkedIn](https://www.linkedin.com/in/patriciabarnabe)
-- E-mail: patbarnabe5@gmail.com
 
 ### Larissa Vilela
 
 - [LinkedIn](https://www.linkedin.com/in/larissa-vilela-sobral/)
 - E-mail: larissavilelasobral@gmail.com
+
+### Patrícia Barnabé
+
+- [LinkedIn](https://www.linkedin.com/in/patriciabarnabe)
+- E-mail: patbarnabe5@gmail.com
