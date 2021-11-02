@@ -36,18 +36,17 @@ Você pode acessar a aplicação utilizando o usuário de teste abaixo:
 
 ---
 ## :pencil2: Histórias de Usuários
-![img](./src/assets/historia1.png)
-<img src="./src/assets/historia1.png" alt="drawing" width="800"/>
-![img](./src/assets/historia2.png)
-![img](./src/assets/historia3.png)
-![img](./src/assets/historia4.png)
+<img src="./src/assets/historia1.png" alt="historia1" width="800"/>
+<img src="./src/assets/historia2.png" alt="historia2" width="800"/>
+<img src="./src/assets/historia3.png" alt="historia3" width="800"/>
+<img src="./src/assets/historia4.png" alt="historia4" width="800"/>
 
 ---
 ## :art: Protótipos 
 
 * ####  Mobile
 ![img](./src/assets/prototipo-mobile.png)
-
+<img src="./src/assets/prototipo-mobile.png" alt="prototipo-mobile" width="800"/>
 * #### Desktop
 ![img](./src/assets/prototipo-desktop.png)
 
